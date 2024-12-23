@@ -16,7 +16,7 @@ def slurp(filename):
             return file.read()
     except OSError as problem:
         logging.error(f'slurp: {problem}')
-        return None
+        return ''
 
 
 def main():
