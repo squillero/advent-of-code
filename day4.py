@@ -1,7 +1,6 @@
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
-from itertools import product
 import numpy as np
 from icecream import ic
 
@@ -14,12 +13,9 @@ INPUT_FILE = 'day4-input.txt'
 
 def read_station(filename):
     station = list()
-    try:
-        with open(filename) as file:
-            for line in file:
-                station.append(list(line.rstrip()))
-    except OSError as problem:
-        exit(problem)
+    with open(filename) as file:
+        for line in file:
+            station.append(list(line.rstrip()))
     return np.array(station)
 
 
@@ -66,7 +62,6 @@ def get_paths_x(station, pos):
 
 
 def main():
-    r"""Standard entry point"""
     station = read_station(INPUT_FILE)
 
     count = 0

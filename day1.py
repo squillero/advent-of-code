@@ -10,19 +10,15 @@ def read_lists(filename):
     r"""Read left/right lists from file"""
     right_list = list()
     left_list = list()
-    try:
-        with open(filename) as file:
-            for line in file:
-                left, right = line.split()
-                left_list.append(int(left))
-                right_list.append(int(right))
-    except OSError as problem:
-        exit(problem)
+    with open(filename) as file:
+        for line in file:
+            left, right = line.split()
+            left_list.append(int(left))
+            right_list.append(int(right))
     return left_list, right_list
 
 
 def main():
-    r"""Standard entry point"""
     left_list, right_list = read_lists(INPUT_FILE)
 
     distance = sum(abs(l - r) for l, r in zip(sorted(left_list), sorted(right_list)))

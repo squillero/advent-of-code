@@ -14,7 +14,6 @@ def check_report_safety(report):
 
 
 def main():
-    r"""Standard entry point"""
     safe_count_1 = 0
     safe_count_2 = 0
     try:

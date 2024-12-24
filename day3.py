@@ -1,28 +1,15 @@
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
-import logging
 import re
 from icecream import ic
 
-INPUT_FILE = 'day3-example.txt'
+# INPUT_FILE = 'day3-example.txt'
 INPUT_FILE = 'day3-input.txt'
 
 
-def slurp(filename):
-    r"""Slurp the whole file"""
-    try:
-        with open(filename) as file:
-            return file.read()
-    except OSError as problem:
-        logging.error(f'slurp: {problem}')
-        return ''
-
-
 def main():
-    r"""Standard entry point"""
-
-    text = slurp(INPUT_FILE)
+    text = open(INPUT_FILE).read()
     ops = re.compile(r'mul\((\d+),(\d+)\)')
 
     result = 0
