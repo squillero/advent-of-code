@@ -22,11 +22,11 @@ def read_problem(filename):
     return problem
 
 
-def evaluate_equation(nums, ops):
-    nums = list(reversed(nums))
-    for op in ops:
-        nums.append(op(nums.pop(), nums.pop()))
-    return nums[0]
+def evaluate_equation(numbers, operators):
+    numbers = list(reversed(numbers))
+    for op in operators:
+        numbers.append(op(numbers.pop(), numbers.pop()))
+    return numbers[0]
 
 
 def main():
