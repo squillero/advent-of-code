@@ -13,8 +13,9 @@ INPUT_FILE = 'day6-input.txt'
 
 # Directions: North ⟳ East ⟳ South ⟳ West
 DIRECTION_STEP = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-STEPPED_TILE = 'X'
+CURRENT_POSITION = '^'
 OBSTACLE = '#'
+STEPPED_TILE = 'X'
 NEW_OBSTRUCTION = 'O'
 
 Position = namedtuple('Position', ['row', 'col', 'dir'])
@@ -57,7 +58,7 @@ def stuck_in_loop(pos, map_):
 
 def main():
     map_ = np.array([list(line.rstrip()) for line in open(INPUT_FILE)])
-    rows, cols = np.where(map_ == '^')
+    rows, cols = np.where(map_ == CURRENT_POSITION)
     # note: the cast is required (ndarrays are mutable)
     initial_pos = Position(int(rows[0]), int(cols[0]), 0)
 
@@ -68,7 +69,7 @@ def main():
     ic(stepped_positions)
 
     selectable_positions = 0
-    map_[initial_pos.row, initial_pos.col] = '^'
+    map_[initial_pos.row, initial_pos.col] = CURRENT_POSITION
     for r, c in tqdm(zip(*np.where(map_ == STEPPED_TILE)), total=stepped_positions - 1):
         map_[r, c] = NEW_OBSTRUCTION
         selectable_positions += stuck_in_loop(initial_pos, map_)
