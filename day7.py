@@ -29,8 +29,8 @@ def evaluate_equation(numbers, operators):
 
 def main():
     problem = read_problem(INPUT_FILE)
-    operators = [operator.add, operator.mul]
 
+    operators = [operator.add, operator.mul]
     calibration = 0
     for value, numbers in tqdm(problem):
         if any(
