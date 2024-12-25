@@ -42,7 +42,7 @@ def check_update(sequence, rules):
 
 
 def add_page_to_sequence(sequence, page, rules):
-    r"""Insert `page` into `sequence` in a valid position -- O(len(seq))"""
+    r"""Insert `page` into `sequence` in the first valid position -- O(len(seq))"""
     candidates = (sequence[:i] + [page] + sequence[i:] for i in range(len(sequence) + 1))
     return next(filter(partial(check_update, rules=rules), candidates))
 
@@ -56,8 +56,8 @@ def main():
 
     correct_sequences = list()
     for wrong in filter(lambda s: not check_update(s, rules), updates):
-        tmp = accumulate(wrong, partial(add_page_to_sequence, rules=rules), initial=list())
-        correct_sequences.append(list(tmp)[-1])
+        *_, correct = accumulate(wrong, partial(add_page_to_sequence, rules=rules), initial=list())
+        correct_sequences.append(correct)
     checksum = sum(u[len(u) // 2] for u in correct_sequences)
     ic(checksum)
 

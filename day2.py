@@ -1,6 +1,7 @@
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
+from itertools import pairwise
 from icecream import ic
 
 INPUT_FILE = 'day2-input.txt'
@@ -8,7 +9,7 @@ INPUT_FILE = 'day2-input.txt'
 
 def check_report_safety(report):
     r"""Test wether `report` is safe"""
-    return all(1 <= abs(e1 - e2) <= 3 for e1, e2 in zip(report, report[1:])) and (
+    return all(1 <= abs(e1 - e2) <= 3 for e1, e2 in pairwise(report)) and (
         report == sorted(report) or report == sorted(report, reverse=True)
     )
 
