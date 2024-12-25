@@ -11,16 +11,8 @@ TARGET = np.array(list('XMAS'))
 INPUT_FILE = 'day4-input.txt'
 
 
-def read_station(filename):
-    station = list()
-    with open(filename) as file:
-        for line in file:
-            station.append(list(line.rstrip()))
-    return np.array(station)
-
-
 def get_paths(station, pos):
-    r"""Get plausible path to look into"""
+    r"""Get plausible paths to look into"""
     max_r, max_c = station.shape
     r, c = pos
     paths = list()
@@ -62,7 +54,7 @@ def get_paths_x(station, pos):
 
 
 def main():
-    station = read_station(INPUT_FILE)
+    station = np.array([list(line.rstrip()) for line in open(INPUT_FILE)])
 
     count = 0
     for r, c in zip(*np.where(station == 'X')):
