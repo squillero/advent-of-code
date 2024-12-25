@@ -1,5 +1,7 @@
+# Advent of Code 2024 | https://adventofcode.com/2024/day/3
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
+
 
 import re
 from icecream import ic
@@ -10,7 +12,7 @@ INPUT_FILE = 'day3-input.txt'
 
 def main():
     text = open(INPUT_FILE).read()
-    ops = re.compile(r'mul\((\d+),(\d+)\)')
+    ops = re.compile(r'mul\((\d{1,3}),(\d{1,3})\)')
 
     result = 0
     for x, y in re.findall(ops, text):

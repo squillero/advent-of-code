@@ -1,5 +1,7 @@
+# Advent of Code 2024 | https://adventofcode.com/2024/day/6
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
+
 
 from collections import namedtuple
 import numpy as np
@@ -21,7 +23,7 @@ NEW_OBSTRUCTION = 'O'
 Position = namedtuple('Position', ['row', 'col', 'dir'])
 
 
-def walk(pos, map_):
+def walk_straight(pos, map_):
     r"""Proceeds straight until wall or end of map"""
     while (
         0 <= pos.row < map_.shape[0]
@@ -38,8 +40,8 @@ def walk(pos, map_):
 
 def stuck_in_loop(pos, map_):
     r"""Check if guard is stuck in a circular path"""
-    stepped = set()
 
+    stepped = set()
     while 0 <= pos.row < map_.shape[0] and 0 <= pos.col < map_.shape[1]:
         stepped.add(pos)
         if map_[pos.row, pos.col] == OBSTACLE or map_[pos.row, pos.col] == NEW_OBSTRUCTION:
@@ -64,7 +66,7 @@ def main():
 
     pos = Position(initial_pos.row, initial_pos.col, -1)
     while pos is not None:
-        pos = walk(Position(pos.row, pos.col, (pos.dir + 1) % 4), map_)
+        pos = walk_straight(Position(pos.row, pos.col, (pos.dir + 1) % 4), map_)
     stepped_positions = int(np.sum(map_ == STEPPED_TILE))
     ic(stepped_positions)
 

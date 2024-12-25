@@ -1,5 +1,7 @@
+# Advent of Code 2024 | https://adventofcode.com/2024/day/2
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
+
 
 from itertools import pairwise
 from icecream import ic
@@ -15,21 +17,16 @@ def check_report_safety(report):
 
 
 def main():
-    safe_count_1 = 0
-    safe_count_2 = 0
-    try:
-        with open(INPUT_FILE) as file:
-            for line in file:
-                report = [int(r) for r in line.split()]
+    safe_count_1 = safe_count_2 = 0
+    for line in open(INPUT_FILE):
+        report = [int(r) for r in line.split()]
 
-                safe = check_report_safety(report)
-                safe_count_1 += safe
+        safe = check_report_safety(report)
+        safe_count_1 += safe
 
-                candidate_reports = (report[:i] + report[i + 1 :] for i in range(len(report)))
-                safe_count_2 += safe or any(check_report_safety(r) for r in candidate_reports)
+        candidate_reports = (report[:i] + report[i + 1 :] for i in range(len(report)))
+        safe_count_2 += safe or any(check_report_safety(r) for r in candidate_reports)
 
-    except OSError as problem:
-        exit(problem)
     ic(safe_count_1)
     ic(safe_count_2)
 

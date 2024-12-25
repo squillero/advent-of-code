@@ -1,5 +1,7 @@
+# Advent of Code 2024 | https://adventofcode.com/2024/day/4
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
+
 
 import numpy as np
 from icecream import ic
