@@ -11,8 +11,6 @@ from icecream import ic
 # INPUT_FILE = 'day7-example.txt'
 INPUT_FILE = 'day7-input.txt'
 
-OPERATORS = [operator.add, operator.mul]
-
 
 def read_problem(filename):
     problem = list()
@@ -31,22 +29,23 @@ def evaluate_equation(numbers, operators):
 
 def main():
     problem = read_problem(INPUT_FILE)
+    operators = [operator.add, operator.mul]
 
     calibration = 0
     for value, numbers in tqdm(problem):
         if any(
             evaluate_equation(numbers, o) == value
-            for o in product(OPERATORS, repeat=len(numbers) - 1)
+            for o in product(operators, repeat=len(numbers) - 1)
         ):
             calibration += value
     ic(calibration)
 
-    OPERATORS.append(lambda a, b: int(str(a) + str(b)))
+    operators.append(lambda a, b: int(str(a) + str(b)))
     calibration = 0
     for value, numbers in tqdm(problem):
         if any(
             evaluate_equation(numbers, o) == value
-            for o in product(OPERATORS, repeat=len(numbers) - 1)
+            for o in product(operators, repeat=len(numbers) - 1)
         ):
             calibration += value
     ic(calibration)
