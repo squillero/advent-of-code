@@ -51,10 +51,12 @@ def add_page_to_sequence(sequence, page, rules):
 def main():
     rules, updates = read_problem_definition(INPUT_FILE)
 
+    # --- Part One ---
     correct_updates = filter(partial(check_update, rules=rules), updates)
     checksum = sum(u[len(u) // 2] for u in correct_updates)
     ic(checksum)
 
+    # --- Part Two ---
     correct_sequences = list()
     for wrong in filter(lambda s: not check_update(s, rules), updates):
         *_, correct = accumulate(wrong, partial(add_page_to_sequence, rules=rules), initial=list())

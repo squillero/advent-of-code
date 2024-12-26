@@ -17,6 +17,7 @@ def check_report_safety(report):
 
 
 def main():
+    # --- Part One & Two ---
     safe_count_1 = safe_count_2 = 0
     for line in open(INPUT_FILE):
         report = [int(r) for r in line.split()]

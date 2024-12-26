@@ -58,12 +58,14 @@ def get_paths_x(station, pos):
 def main():
     station = np.array([list(line.rstrip()) for line in open(INPUT_FILE)])
 
+    # --- Part One ---
     count = 0
     for r, c in zip(*np.where(station == 'X')):
         for path in get_paths(station, (r, c)):
             count += np.array_equal(station[path], TARGET)
     ic(count)
 
+    # --- Part Two ---
     xcount = 0
     for r, c in zip(*np.where(station == 'A')):
         for path in get_paths_x(station, (r, c)):

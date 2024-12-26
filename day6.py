@@ -64,12 +64,14 @@ def main():
     # note: the cast is required (ndarrays are mutable)
     initial_pos = Position(int(rows[0]), int(cols[0]), 0)
 
+    # --- Part One ---
     pos = Position(initial_pos.row, initial_pos.col, -1)
     while pos is not None:
         pos = walk_straight(Position(pos.row, pos.col, (pos.dir + 1) % 4), map_)
     stepped_positions = int(np.sum(map_ == STEPPED_TILE))
     ic(stepped_positions)
 
+    # --- Part Two ---
     selectable_positions = 0
     map_[initial_pos.row, initial_pos.col] = CURRENT_POSITION
     for r, c in tqdm(zip(*np.where(map_ == STEPPED_TILE)), total=stepped_positions - 1):

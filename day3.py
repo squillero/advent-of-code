@@ -14,11 +14,13 @@ def main():
     text = open(INPUT_FILE).read()
     ops = re.compile(r'mul\((\d{1,3}),(\d{1,3})\)')
 
+    # --- Part One ---
     result = 0
     for x, y in re.findall(ops, text):
         result += int(x) * int(y)
     ic(result)
 
+    # --- Part Two ---
     result = 0
     enabled = re.findall(r'''(?:(?<=do\(\))|^)(.*?)(?:(?=don't\(\))|$)''', text, flags=re.DOTALL)
     for x, y in re.findall(ops, ' '.join(enabled)):

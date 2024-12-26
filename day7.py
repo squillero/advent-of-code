@@ -30,6 +30,7 @@ def evaluate_equation(numbers, operators):
 def main():
     problem = read_problem(INPUT_FILE)
 
+    # --- Part One ---
     operators = [operator.add, operator.mul]
     calibration = 0
     for value, numbers in tqdm(problem):
@@ -40,6 +41,7 @@ def main():
             calibration += value
     ic(calibration)
 
+    # --- Part Two ---
     operators.append(lambda a, b: int(str(a) + str(b)))
     calibration = 0
     for value, numbers in tqdm(problem):

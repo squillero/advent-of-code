@@ -22,9 +22,11 @@ def read_lists(filename):
 def main():
     left_list, right_list = read_lists(INPUT_FILE)
 
+    # --- Part One ---
     distance = sum(abs(l - r) for l, r in zip(sorted(left_list), sorted(right_list)))
     ic(distance)
 
+    # --- Part Two ---
     similarity = sum(i * right_list.count(i) for i in left_list)
     ic(similarity)
 
