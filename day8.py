@@ -2,7 +2,6 @@
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
-from math import sqrt
 from collections import namedtuple, defaultdict
 from itertools import product, permutations
 import numpy as np
