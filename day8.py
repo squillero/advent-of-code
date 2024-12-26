@@ -42,7 +42,7 @@ def main():
     for _, stats in stations.items():
         for s1, s2 in permutations(stats, 2):
             anti = antinode(s1, s2)
-            if inside_map(anti, map_) and map_[anti] != ANTINODE_SQUARE:
+            if inside_map(anti, map_):
                 map_[anti] = ANTINODE_SQUARE
     unique_antinodes = int(np.sum(map_ == ANTINODE_SQUARE))
     ic(unique_antinodes)
