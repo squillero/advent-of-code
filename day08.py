@@ -17,14 +17,17 @@ ANTINODE_SQUARE = '#'
 
 
 def antinode(s1, s2):
+    r"""Ppostion of a possible antinode"""
     return Position(2 * s2.row - s1.row, 2 * s2.col - s1.col)
 
 
 def inside_map(pos, map_):
+    r"""Checks whter `pos` is inside `map_`"""
     return 0 <= pos.row < map_.shape[0] and 0 <= pos.col < map_.shape[1]
 
 
 def parse_map(map_):
+    r"""Extract the dictionary of `frequency` -> {`stations`}"""
     stations = defaultdict(set)
     for r, c in product(range(map_.shape[0]), range(map_.shape[1])):
         if map_[r, c] != EMPTY_SQUARE:

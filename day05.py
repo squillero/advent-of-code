@@ -16,17 +16,13 @@ Rule = namedtuple('Rule', ['before', 'after'])
 
 def read_problem_definition(filename):
     r"""Lazy parse of input file using regex"""
-
     text = open(filename).read()
-
     rules = list()
     for b, a in re.findall(r'(\d+)\|(\d+)\n', text):
         rules.append(Rule(int(b), int(a)))
-
     updates = list()
     for line in re.findall(r'(^(?:\d+,)*\d+)$', text, flags=re.MULTILINE):
         updates.append([int(p) for p in line.split(',')])
-
     return rules, updates
 
 

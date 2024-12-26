@@ -13,6 +13,7 @@ INPUT_FILE = 'day7-input.txt'
 
 
 def read_problem(filename):
+    r"""Read the list of `<result> : <n1> ... <nk>`"""
     problem = list()
     for line in open(filename):
         value, tmp = line.split(':')
@@ -21,6 +22,7 @@ def read_problem(filename):
 
 
 def evaluate_equation(numbers, operators):
+    r"""Reversed stack-like evaluation"""
     numbers = list(reversed(numbers))
     for op in operators:
         numbers.append(op(numbers.pop(), numbers.pop()))

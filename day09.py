@@ -15,6 +15,7 @@ EMPTY_BLOCK = -1
 
 
 def read_layout(filename):
+    r"""Parses input file and builds explicit layout and lists"""
     full_layout = list()
     files = list()
     spaces = list()
@@ -30,11 +31,6 @@ def read_layout(filename):
             spaces.append(Chunk(EMPTY_BLOCK, len(full_layout), block))
             full_layout.extend([EMPTY_BLOCK] * block)
     return full_layout, files, spaces
-
-
-def print_layout(layout):
-    layout = ''.join('.' if c < 0 else str(c) for c in layout)
-    ic(layout)
 
 
 def main():

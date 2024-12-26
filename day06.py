@@ -39,8 +39,7 @@ def walk_straight(pos, map_):
 
 
 def stuck_in_loop(pos, map_):
-    r"""Check if guard is stuck in a circular path"""
-
+    r"""Check wether guard is stuck in a circular path"""
     stepped = set()
     while 0 <= pos.row < map_.shape[0] and 0 <= pos.col < map_.shape[1]:
         stepped.add(pos)
