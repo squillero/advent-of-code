@@ -8,8 +8,8 @@ from tqdm.auto import tqdm
 from icecream import ic
 
 
-# INPUT_FILE = 'day7-example.txt'
-INPUT_FILE = 'day7-input.txt'
+# INPUT_FILE = 'day07-example.txt'
+INPUT_FILE = 'day07-input.txt'
 
 
 def read_problem(filename):

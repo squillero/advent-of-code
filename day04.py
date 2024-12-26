@@ -8,9 +8,9 @@ from icecream import ic
 
 TARGET = np.array(list('XMAS'))
 
-# INPUT_FILE = 'day4-example.txt'
-# INPUT_FILE = 'day4-example_dots2.txt'
-INPUT_FILE = 'day4-input.txt'
+# INPUT_FILE = 'day04-example.txt'
+# INPUT_FILE = 'day04-example_dots2.txt'
+INPUT_FILE = 'day04-input.txt'
 
 
 def get_paths(station, pos):

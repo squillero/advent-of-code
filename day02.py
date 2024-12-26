@@ -6,7 +6,7 @@
 from itertools import pairwise
 from icecream import ic
 
-INPUT_FILE = 'day2-input.txt'
+INPUT_FILE = 'day02-input.txt'
 
 
 def check_report_safety(report):

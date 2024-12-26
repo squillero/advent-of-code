@@ -4,7 +4,7 @@
 
 from icecream import ic
 
-INPUT_FILE = 'day1-input.txt'
+INPUT_FILE = 'day01-input.txt'
 
 
 def read_lists(filename):

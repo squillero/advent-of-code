@@ -6,8 +6,8 @@
 import re
 from icecream import ic
 
-# INPUT_FILE = 'day3-example.txt'
-INPUT_FILE = 'day3-input.txt'
+# INPUT_FILE = 'day03-example.txt'
+INPUT_FILE = 'day03-input.txt'
 
 
 def main():

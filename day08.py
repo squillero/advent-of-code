@@ -8,8 +8,8 @@ import numpy as np
 from icecream import ic
 
 
-# INPUT_FILE = 'day8-example.txt'
-INPUT_FILE = 'day8-input.txt'
+# INPUT_FILE = 'day08-example.txt'
+INPUT_FILE = 'day08-input.txt'
 
 Position = namedtuple('Position', ['row', 'col'])
 EMPTY_SQUARE = '.'

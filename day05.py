@@ -8,8 +8,8 @@ from functools import partial
 import re
 from icecream import ic
 
-# INPUT_FILE = 'day5-example.txt'
-INPUT_FILE = 'day5-input.txt'
+# INPUT_FILE = 'day05-example.txt'
+INPUT_FILE = 'day05-input.txt'
 
 Rule = namedtuple('Rule', ['before', 'after'])
 

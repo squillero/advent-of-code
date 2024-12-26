@@ -9,8 +9,8 @@ from tqdm.auto import tqdm
 from icecream import ic
 
 
-INPUT_FILE = 'day6-example.txt'
-INPUT_FILE = 'day6-input.txt'
+# INPUT_FILE = 'day06-example.txt'
+INPUT_FILE = 'day06-input.txt'
 
 
 # Directions: North ⟳ East ⟳ South ⟳ West
