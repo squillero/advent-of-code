@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: 0BSD
 
 from collections import deque, namedtuple
-from tqdm.auto import tqdm
 from icecream import ic
 
 
@@ -63,7 +62,6 @@ def main():
             new_layout[free_block.start : free_block.start + file.len] = [file.id] * file.len
             new_layout[file.start : file.start + file.len] = [EMPTY_BLOCK] * file.len
             spaces[pos] = Chunk(EMPTY_BLOCK, free_block.start + file.len, free_block.len - file.len)
-            assert spaces[pos].len >= 0
     checksum = sum(pos * idx for pos, idx in enumerate(new_layout) if idx != EMPTY_BLOCK)
     ic(checksum)
 
