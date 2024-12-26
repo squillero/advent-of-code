@@ -41,7 +41,7 @@ def main():
     spaces = deque(i for i, b in enumerate(new_layout) if b == EMPTY_BLOCK)
     files = deque(i for i, b in enumerate(new_layout) if b != EMPTY_BLOCK)
     while spaces[0] < files[EMPTY_BLOCK]:
-        new_layout[spaces.popleft()] = new_layout[files[EMPTY_BLOCK]]
+        new_layout[spaces.popleft()] = new_layout[files[-1]]
         new_layout[files.pop()] = EMPTY_BLOCK
     checksum = sum(pos * idx for pos, idx in enumerate(new_layout) if idx != EMPTY_BLOCK)
     ic(checksum)
