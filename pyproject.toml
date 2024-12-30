@@ -1,7 +1,7 @@
 [tool.poetry]
-    name         = "advent24"
+    name         = "AoC"
     version      = "0.1.0"
-    description  = "Advent of Code 2024"
+    description  = "Advent of Code"
     authors      = ["Giovanni Squillero <squillero@polito.it>"]
     license      = "NOT FOR SHARING"
     readme       = "README.md"
