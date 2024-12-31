@@ -32,13 +32,6 @@ def follow_trail(map_: np.ndarray, current_trails: list[Pos]) -> list[list[Pos]]
         return current_trails
 
 
-def my_int(char):
-    if char == '.':
-        return -2
-    else:
-        return int(char)
-
-
 def main():
     map_ = np.array([[int(c) for c in line.rstrip()] for line in open(INPUT_FILE)])
     map_ = np.pad(map_, pad_width=1, constant_values=-1)
