@@ -1,4 +1,4 @@
-# Advent of Code 2024 | https://adventofcode.com/2024/day/9
+# Advent of Code 2024 | https://adventofcode.com/2024/day/10
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
