@@ -4,7 +4,6 @@
 
 from functools import cache
 from collections import namedtuple
-from tqdm.auto import tqdm
 from icecream import ic
 
 Rule = namedtuple('Rule', ['condition', 'transformation'])
