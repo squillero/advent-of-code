@@ -13,7 +13,7 @@ INPUT_FILE = 'day10-input.txt'
 Pos = namedtuple('Pos', ['r', 'c'])
 
 
-def follow_trail(map_: np.ndarray, current_trails: list[Pos]) -> list[list[Pos]]:
+def follow_trail(map_, current_trails):
     r"""Return all current_trails starting ith the given `trail`"""
     valid_trails = list()
     for trail in current_trails:
