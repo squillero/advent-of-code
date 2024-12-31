@@ -35,7 +35,7 @@ def main():
     STONES = [int(s) for s in open(INPUT_FILE).read().split()]
 
     # --- Part One ---
-    stones = STONES[:]
+    stones = STONES
     num_blinks = 25
     for _ in range(num_blinks):
         new_stones = list()
