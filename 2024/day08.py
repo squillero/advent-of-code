@@ -17,12 +17,12 @@ ANTINODE_SQUARE = '#'
 
 
 def antinode(s1, s2):
-    r"""Ppostion of a possible antinode"""
+    r"""Position of a possible antinode"""
     return Position(2 * s2.row - s1.row, 2 * s2.col - s1.col)
 
 
 def inside_map(pos, map_):
-    r"""Checks whter `pos` is inside `map_`"""
+    r"""Checks whether `pos` is inside `map_`"""
     return 0 <= pos.row < map_.shape[0] and 0 <= pos.col < map_.shape[1]
 
 
