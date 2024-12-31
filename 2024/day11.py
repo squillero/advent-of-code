@@ -48,9 +48,8 @@ def main():
     ic(num_blinks, num_stones)
 
     # --- Part Two ---
-    stones = STONES[:]
     num_blinks = 75
-    num_stones = sum(count_stones(s, num_blinks) for s in stones)
+    num_stones = sum(count_stones(s, num_blinks) for s in STONES)
     ic(num_blinks, num_stones)
 
 
