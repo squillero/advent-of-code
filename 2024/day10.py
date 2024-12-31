@@ -6,7 +6,7 @@ from collections import namedtuple
 import numpy as np
 from icecream import ic
 
- s
+
 # INPUT_FILE = 'day10-example.txt'
 INPUT_FILE = 'day10-input.txt'
 
