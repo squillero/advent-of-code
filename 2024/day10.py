@@ -13,8 +13,8 @@ INPUT_FILE = 'day10-input.txt'
 Pos = namedtuple('Pos', ['r', 'c'])
 
 
-def follow_trail(map_, current_trails):
-    r"""Return all current_trails starting ith the given `trail`"""
+def follow_trails(map_, current_trails):
+    r"""Advance all possible single steps in the given `current_trails`"""
     valid_trails = list()
     for trail in current_trails:
         pos = trail[-1]
@@ -27,7 +27,7 @@ def follow_trail(map_, current_trails):
             if map_[p] == map_[pos] + 1:
                 valid_trails.append(trail[:] + [p])
     if valid_trails:
-        return follow_trail(map_, valid_trails)
+        return follow_trails(map_, valid_trails)
     else:
         return current_trails
 
@@ -37,7 +37,7 @@ def main():
     map_ = np.pad(map_, pad_width=1, constant_values=-1)
 
     # --- Part One ---
-    trails = follow_trail(map_, [[Pos(r, c)] for r, c in zip(*np.where(map_ == 0))])
+    trails = follow_trails(map_, [[Pos(r, c)] for r, c in zip(*np.where(map_ == 0))])
     trailhead_score = len(set((t[0], t[-1]) for t in trails))
     ic(trailhead_score)
 
