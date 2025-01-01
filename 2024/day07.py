@@ -21,7 +21,7 @@ def read_problem(filename):
     return problem
 
 
-def evaluate_equation(numbers, operators):
+def evaluate_formula(numbers, operators):
     r"""Reversed stack-like evaluation"""
     numbers = list(reversed(numbers))
     for op in operators:
@@ -37,7 +37,7 @@ def main():
     calibration = 0
     for value, numbers in tqdm(problem):
         if any(
-            evaluate_equation(numbers, o) == value
+            evaluate_formula(numbers, o) == value
             for o in product(operators, repeat=len(numbers) - 1)
         ):
             calibration += value
@@ -48,7 +48,7 @@ def main():
     calibration = 0
     for value, numbers in tqdm(problem):
         if any(
-            evaluate_equation(numbers, o) == value
+            evaluate_formula(numbers, o) == value
             for o in product(operators, repeat=len(numbers) - 1)
         ):
             calibration += value
