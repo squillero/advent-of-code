@@ -1,4 +1,4 @@
-# Advent of Code 2024 | https://adventofcode.com/2024/day/12
+# Advent of Code 2024 | https://adventofcode.colom/2024/day/12
 # Copyright 2024 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
@@ -14,14 +14,14 @@ INPUT_FILE = 'day12-input.txt'
 
 @dataclass(frozen=True)
 class Position:
-    r: int
-    c: int
+    row: int
+    col: int
 
     def __add__(self, other):
-        return Position(self.r + other.r, self.c + other.c)
+        return Position(self.row + other.row, self.col + other.col)
 
     def __call__(self, garden):
-        return garden[self.r, self.c]
+        return garden[self.row, self.col]
 
     @property
     def above(self):
@@ -49,7 +49,7 @@ SPECIAL = '•'
 
 def poslist_to_idxs(positions):
     r"""Transforms a list of `Position` into `NumPy` indexes"""
-    return [p.r for p in positions], [p.c for p in positions]
+    return [p.row for p in positions], [p.col for p in positions]
 
 
 def find_region(garden):
