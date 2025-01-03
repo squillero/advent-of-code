@@ -81,7 +81,7 @@ def main():
 
     # --- Part One and Part Two ---
     price = 0
-    discountedPrice = 0
+    discounted_price = 0
     while pos := find_region(garden):
         area = flood(garden, pos)
         *_, borders = accumulate(area, lambda x, p: x + list(p.neighbors - area), initial=list())
@@ -101,12 +101,12 @@ def main():
             sides += p(garden) != p.left(garden) and not (
                 p.above(garden) == p(garden) and p.above(garden) != p.above.left(garden)
             )
-        discountedPrice += sides * len(area)
+        discounted_price += sides * len(area)
 
         garden[poslist_to_idxs(area)] = SPECIAL
 
     ic(price)
-    ic(discountedPrice)
+    ic(discounted_price)
 
 
 if __name__ == '__main__':
