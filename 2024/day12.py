@@ -1,5 +1,5 @@
 # Advent of Code 2024 | https://adventofcode.colom/2024/day/12
-# Copyright 2024 by Giovanni Squillero
+# Copyright 2025 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
 from dataclasses import dataclass
