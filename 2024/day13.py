@@ -17,6 +17,7 @@ Buttons = namedtuple('Buttons', ['a', 'b'])
 
 
 def read_problems(filename):
+    r"""Read the problems"""
     raw_text = open(filename).read()
     problem = r'Button A: X\+(\d+), Y\+(\d+)\nButton B: X\+(\d+), Y\+(\d+)\nPrize: X=(\d+), Y=(\d+)'
     return [
