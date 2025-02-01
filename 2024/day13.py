@@ -5,7 +5,6 @@
 import re
 from fractions import Fraction
 from collections import namedtuple
-from tqdm.auto import tqdm
 from icecream import ic
 
 # INPUT_FILE = 'day13-example.txt'
@@ -61,27 +60,6 @@ def a_star(target, buttons):
     return 0
 
 
-def fillable(tot_x, tot_y, sx, sy):
-    r"""Checks whether `tot` can be reached with steps `s`"""
-    return tot_x % sx == 0 and tot_y % sy == 0 and tot_x // sx == tot_y // sy
-
-
-def fill_and_swap(target, filler, swap):
-    r"""Puts as many `filler` possible, then complete swapping them with `swap`"""
-    tx, ty = target
-    fx, fy = filler
-    sx, sy = swap
-    num_swaps, num_fills = next(
-        (
-            ((tx - fx * num_fills) // sx, num_fills)
-            for num_fills in range(min(tx // fx, ty // fy) + 1)
-            if fillable(tx - fx * num_fills, ty - fy * num_fills, sx, sy)
-        ),
-        (0, 0),
-    )
-    return num_fills, num_swaps
-
-
 def main():
     problems = read_problems(INPUT_FILE)
 
@@ -91,28 +69,29 @@ def main():
     #     tokens += a_star(target, buttons)
     # ic(tokens)
 
-    # --- Part One (faster, problem specific) ---
-    tokens = 0
-    for target, buttons in tqdm(problems):
-        a1, b1 = fill_and_swap(
-            (target.x, target.y), (buttons.a.x, buttons.a.y), (buttons.b.x, buttons.b.y)
-        )
-        if a1 and b1:
-            b2, a2 = fill_and_swap(
-                (target.x, target.y), (buttons.b.x, buttons.b.y), (buttons.a.x, buttons.a.y)
-            )
-        else:
-            a2, b2 = 0, 0
-        tokens += min(a1 * 3 + b1, a2 * 3 + b2)
-    ic(tokens)
-
-    # --- Part Two ---
-    # Simply solve the system of two equations...
+    # Solve the system of two equations...
     # a = \frac{B_y T_x - B_x T_y}{A_x B_y - A_y B_x}
     # b = \frac{A_x T_y - A_y T_x}{A_x B_y - A_y B_x}
 
+    # --- Part One ---
     tokens = 0
-    for target, buttons in tqdm(problems):
+    for target, buttons in problems:
+        assert buttons.a.x * buttons.b.y != buttons.a.y * buttons.b.x, "Infinite solutions"
+        a = Fraction(
+            buttons.b.y * target.x - buttons.b.x * target.y,
+            buttons.a.x * buttons.b.y - buttons.a.y * buttons.b.x,
+        )
+        b = Fraction(
+            buttons.a.x * target.y - buttons.a.y * target.x,
+            buttons.a.x * buttons.b.y - buttons.a.y * buttons.b.x,
+        )
+        if a.is_integer() and b.is_integer():
+            tokens += int(a * 3 + b)
+    ic(tokens)
+
+    # --- Part Two ---
+    tokens = 0
+    for target, buttons in problems:
         target = State(x=target.x + 10000000000000, y=target.y + 10000000000000, tok=None)
 
         assert buttons.a.x * buttons.b.y != buttons.a.y * buttons.b.x, "Infinite solutions"
