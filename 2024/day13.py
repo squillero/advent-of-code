@@ -18,7 +18,6 @@ Buttons = namedtuple('Buttons', ['a', 'b'])
 
 def read_problems(filename):
     r"""Read the problems"""
-    raw_text = open(filename).read()
     problem = r'Button A: X\+(\d+), Y\+(\d+)\nButton B: X\+(\d+), Y\+(\d+)\nPrize: X=(\d+), Y=(\d+)'
     return [
         (
@@ -28,7 +27,7 @@ def read_problems(filename):
                 b=State(x=int(nums[2]), y=int(nums[3]), tok=1),
             ),
         )
-        for nums in re.findall(problem, raw_text)
+        for nums in re.findall(problem, open(filename).read())
     ]
 
 
