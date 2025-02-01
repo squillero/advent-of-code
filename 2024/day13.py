@@ -108,8 +108,8 @@ def main():
 
     # --- Part Two ---
     # Simply solve the system of two equations...
-    # a = -\frac{B_y T_x-B_x T_y}{A_y B_x-A_x B_y}
-    # b = -\frac{A_x T_y-A_y T_x}{A_y B_x-A_x B_y}
+    # a = \frac{B_y T_x - B_x T_y}{A_x B_y - A_y B_x}
+    # b = \frac{A_x T_y - A_y T_x}{A_x B_y - A_y B_x}
 
     tokens = 0
     for target, buttons in tqdm(problems):
