@@ -2,14 +2,13 @@
 # Copyright 2025 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
-from math import sqrt
 import re
-from collections import namedtuple, Counter
-from itertools import count, chain
+from fractions import Fraction
+from collections import namedtuple
 from tqdm.auto import tqdm
 from icecream import ic
 
-# INPUT_FILE = 'day13-example_small.txt'
+# INPUT_FILE = 'day13-example.txt'
 INPUT_FILE = 'day13-input.txt'
 
 
@@ -87,10 +86,10 @@ def main():
     problems = read_problems(INPUT_FILE)
 
     # --- Part One (scholastic) ---
-    tokens = 0
-    for target, buttons in tqdm(problems):
-        tokens += a_star(target, buttons)
-    ic(tokens)
+    # tokens = 0
+    # for target, buttons in tqdm(problems):
+    #     tokens += a_star(target, buttons)
+    # ic(tokens)
 
     # --- Part One (faster, problem specific) ---
     tokens = 0
@@ -108,23 +107,25 @@ def main():
     ic(tokens)
 
     # --- Part Two ---
-    OFFSET = 10_000_000_000_000
+    # Simply solve the system of two equations...
+    # a = -\frac{B_y T_x-B_x T_y}{A_y B_x-A_x B_y}
+    # b = -\frac{A_x T_y-A_y T_x}{A_y B_x-A_x B_y}
+
     tokens = 0
     for target, buttons in tqdm(problems):
-        target = State(target.x + OFFSET, target.y + OFFSET, target.tok)
-        a1, b1 = fill_and_swap(
-            (target.x, target.y), (buttons.a.x, buttons.a.y), (buttons.b.x, buttons.b.y)
-        )
-        ic(a1, b1)
-        if a1 and b1:
-            b2, a2 = fill_and_swap(
-                (target.x, target.y), (buttons.b.x, buttons.b.y), (buttons.a.x, buttons.a.y)
-            )
-        else:
-            a2, b2 = 0, 0
-        ic(a2, b2)
-        tokens += min(a1 * 3 + b1, a2 * 3 + b2)
+        target = State(x=target.x + 10000000000000, y=target.y + 10000000000000, tok=None)
 
+        assert buttons.a.x * buttons.b.y != buttons.a.y * buttons.b.x, "Infinite solutions"
+        a = Fraction(
+            buttons.b.y * target.x - buttons.b.x * target.y,
+            buttons.a.x * buttons.b.y - buttons.a.y * buttons.b.x,
+        )
+        b = Fraction(
+            buttons.a.x * target.y - buttons.a.y * target.x,
+            buttons.a.x * buttons.b.y - buttons.a.y * buttons.b.x,
+        )
+        if a.is_integer() and b.is_integer():
+            tokens += int(a * 3 + b)
     ic(tokens)
 
 
