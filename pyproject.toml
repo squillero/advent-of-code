@@ -7,7 +7,7 @@
     version      = "0.1.0"
     description  = "Advent of Code"
     authors      = ["Giovanni Squillero <squillero@polito.it>"]
-    license      = "NOT FOR SHARING"
+    license      = "0BSD"
     readme       = "README.md"
     package-mode = false
 
