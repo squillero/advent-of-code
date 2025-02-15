@@ -78,7 +78,7 @@ def main():
                     print('#' if m[SPACE_HEIGHT - 1 - r, c] == 1 else ' ', end='')
                 print()
             print()
-            exit()
+            easter_egg = True
 
         steps += 1
         robots = list(map(robot_step, robots))
