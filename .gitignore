@@ -174,5 +174,6 @@ cython_debug/
 .DS_Store
 
 # ADVENT OF CODE specific
+poetry.lock
 day*-*.txt
 .vscode
