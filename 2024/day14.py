@@ -61,9 +61,8 @@ def main():
     # --- Part Two ---
     robots = list(robots_init)
     steps = 0
-    easter_egg = False
     with tqdm() as pbar:
-        while not easter_egg:
+        while True:
             m = np.full((SPACE_HEIGHT, SPACE_WIDTH), ' ')
             for r in robots:
                 m[SPACE_HEIGHT - 1 - r.y, r.x] = '#'
@@ -75,11 +74,12 @@ def main():
                 ic(steps)
                 for r in range(SPACE_HEIGHT):
                     print(''.join(m[SPACE_HEIGHT - 1 - r, c] for c in range(SPACE_WIDTH)))
-                easter_egg = True
+                break
 
+            robots = list(map(robot_step, robots))
             steps += 1
             pbar.update(1)
-            robots = list(map(robot_step, robots))
+    ic(steps)
 
 
 if __name__ == '__main__':
