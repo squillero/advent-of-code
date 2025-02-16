@@ -71,7 +71,6 @@ def main():
                 '#' * 10 in ''.join(m.T[i]) for i in range(SPACE_WIDTH)
             ):
                 # A pattern with a line and a column BOTH with 10 conscutive #'s!?
-                ic(steps)
                 for r in range(SPACE_HEIGHT):
                     print(''.join(m[SPACE_HEIGHT - 1 - r, c] for c in range(SPACE_WIDTH)))
                 break
