@@ -6,8 +6,9 @@ from collections import namedtuple
 from operator import mul
 from functools import reduce
 import re
-from icecream import ic
 import numpy as np
+from tqdm.auto import tqdm
+from icecream import ic
 
 # INPUT_FILE = 'day14-example.txt'
 INPUT_FILE = 'day14-input.txt'
@@ -40,8 +41,8 @@ def main():
 
     # --- Part One ---
     robots = list(robots_init)
-    # for _ in tqdm(range(100)):
-    #    robots = map(robot_step, robots)
+    for _ in tqdm(range(100)):
+        robots = map(robot_step, robots)
 
     q = [0, 0, 0, 0]
     for r in robots:
@@ -58,13 +59,7 @@ def main():
     ic(safety_factor)
 
     # --- Part Two ---
-    # PIXEL_SIZE = 5
-    # pygame.init()
-    # window = pygame.display.set_mode((SPACE_WIDTH * PIXEL_SIZE, SPACE_HEIGHT * PIXEL_SIZE))
-    # pygame.display.set_caption('AOC Day 14')
-    # font = pygame.font.Font('freesansbold.ttf', 20)
     robots = list(robots_init)
-
     steps = 0
     easter_egg = False
     while not easter_egg:
