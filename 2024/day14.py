@@ -60,24 +60,25 @@ def main():
 
     # --- Part Two ---
     robots = list(robots_init)
+    floor = np.full((SPACE_HEIGHT, SPACE_WIDTH), ' ')
     steps = 0
     with tqdm() as pbar:
         while True:
-            m = np.full((SPACE_HEIGHT, SPACE_WIDTH), ' ')
+            floor.fill(' ')
             for r in robots:
-                m[SPACE_HEIGHT - 1 - r.y, r.x] = '#'
+                floor[SPACE_HEIGHT - 1 - r.y, r.x] = '#'
 
-            if any('#' * 10 in ''.join(m[i]) for i in range(SPACE_HEIGHT)) and any(
-                '#' * 10 in ''.join(m.T[i]) for i in range(SPACE_WIDTH)
+            if any('#' * 10 in ''.join(floor[i]) for i in range(SPACE_HEIGHT)) and any(
+                '#' * 10 in ''.join(floor.T[i]) for i in range(SPACE_WIDTH)
             ):
                 # A pattern with a line and a column BOTH with 10 conscutive #'s!?
-                for r in range(SPACE_HEIGHT):
-                    print(''.join(m[SPACE_HEIGHT - 1 - r, c] for c in range(SPACE_WIDTH)))
                 break
 
             robots = list(map(robot_step, robots))
             steps += 1
             pbar.update(1)
+    for r in range(SPACE_HEIGHT):
+        print(''.join(floor[SPACE_HEIGHT - 1 - r, c] for c in range(SPACE_WIDTH)))
     ic(steps)
 
 
