@@ -62,21 +62,24 @@ def main():
     robots = list(robots_init)
     steps = 0
     easter_egg = False
-    while not easter_egg:
-        m = np.zeros((SPACE_HEIGHT, SPACE_WIDTH))
-        for r in robots:
-            m[SPACE_HEIGHT - 1 - r.y, r.x] = 1
-        if max(m.sum(axis=0)) > 20 and max(m.sum(axis=1)) > 20:
-            ic(steps)
-            for r in range(SPACE_HEIGHT):
-                for c in range(SPACE_WIDTH):
-                    print('#' if m[SPACE_HEIGHT - 1 - r, c] == 1 else ' ', end='')
-                print()
-            print()
-            easter_egg = True
+    with tqdm() as pbar:
+        while not easter_egg:
+            m = np.full((SPACE_HEIGHT, SPACE_WIDTH), ' ')
+            for r in robots:
+                m[SPACE_HEIGHT - 1 - r.y, r.x] = '#'
 
-        steps += 1
-        robots = list(map(robot_step, robots))
+            if any('#' * 10 in ''.join(m[i]) for i in range(SPACE_HEIGHT)) and any(
+                '#' * 10 in ''.join(m.T[i]) for i in range(SPACE_WIDTH)
+            ):
+                # A pattern with a line and a column BOTH with 10 conscutive #'s!?
+                ic(steps)
+                for r in range(SPACE_HEIGHT):
+                    print(''.join(m[SPACE_HEIGHT - 1 - r, c] for c in range(SPACE_WIDTH)))
+                easter_egg = True
+
+            steps += 1
+            pbar.update(1)
+            robots = list(map(robot_step, robots))
 
 
 if __name__ == '__main__':
