@@ -23,25 +23,33 @@ def get_paths(station, pos):
         paths.append(([r - o for o in range(TARGET.size)], [c] * TARGET.size))
     if r >= TARGET.size - 1 and c <= max_c - TARGET.size:
         # North-East
-        paths.append(([r - o for o in range(TARGET.size)], [c + o for o in range(TARGET.size)]))
+        paths.append(
+            ([r - o for o in range(TARGET.size)], [c + o for o in range(TARGET.size)])
+        )
     if c <= max_c - TARGET.size:
         # East
         paths.append(([r] * TARGET.size, [c + o for o in range(TARGET.size)]))
     if r <= max_r - TARGET.size and c <= max_c - TARGET.size:
         # South-East
-        paths.append(([r + o for o in range(TARGET.size)], [c + o for o in range(TARGET.size)]))
+        paths.append(
+            ([r + o for o in range(TARGET.size)], [c + o for o in range(TARGET.size)])
+        )
     if r <= max_r - TARGET.size:
         # South
         paths.append(([r + o for o in range(TARGET.size)], [c] * TARGET.size))
     if r <= max_r - TARGET.size and c >= TARGET.size - 1:
         # South-West
-        paths.append(([r + o for o in range(TARGET.size)], [c - o for o in range(TARGET.size)]))
+        paths.append(
+            ([r + o for o in range(TARGET.size)], [c - o for o in range(TARGET.size)])
+        )
     if c >= TARGET.size - 1:
         # West
         paths.append(([r] * TARGET.size, [c - o for o in range(TARGET.size)]))
     if r >= TARGET.size - 1:
         # North-West
-        paths.append(([r - o for o in range(TARGET.size)], [c - o for o in range(TARGET.size)]))
+        paths.append(
+            ([r - o for o in range(TARGET.size)], [c - o for o in range(TARGET.size)])
+        )
     return paths
 
 
@@ -69,7 +77,12 @@ def main():
     xcount = 0
     for r, c in zip(*np.where(station == 'A')):
         for path in get_paths_x(station, (r, c)):
-            xcount += ''.join(station[path].tolist()) in {'MSMS', 'SMSM', 'MMSS', 'SSMM'}
+            xcount += ''.join(station[path].tolist()) in {
+                'MSMS',
+                'SMSM',
+                'MMSS',
+                'SSMM',
+            }
     ic(xcount)
 
 

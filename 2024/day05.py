@@ -55,7 +55,9 @@ def main():
     # --- Part Two ---
     correct_sequences = list()
     for wrong in filter(lambda s: not check_update(s, rules), updates):
-        *_, correct = accumulate(wrong, partial(add_page_to_sequence, rules=rules), initial=list())
+        *_, correct = accumulate(
+            wrong, partial(add_page_to_sequence, rules=rules), initial=list()
+        )
         correct_sequences.append(correct)
     checksum = sum(u[len(u) // 2] for u in correct_sequences)
     ic(checksum)

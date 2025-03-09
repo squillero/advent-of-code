@@ -69,7 +69,9 @@ def main():
             free_block = spaces[pos]
             layout[free_block.start : free_block.start + file.len] = [file.id] * file.len
             layout[file.start : file.start + file.len] = [EMPTY_BLOCK] * file.len
-            spaces[pos] = Chunk(EMPTY_BLOCK, free_block.start + file.len, free_block.len - file.len)
+            spaces[pos] = Chunk(
+                EMPTY_BLOCK, free_block.start + file.len, free_block.len - file.len
+            )
     checksum = sum(pos * idx for pos, idx in enumerate(layout) if idx != EMPTY_BLOCK)
     ic(checksum)
 

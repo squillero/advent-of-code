@@ -76,7 +76,9 @@ def main():
     # --- Part One ---
     tokens = 0
     for target, buttons in problems:
-        assert buttons.a.x * buttons.b.y != buttons.a.y * buttons.b.x, "Infinite solutions"
+        assert buttons.a.x * buttons.b.y != buttons.a.y * buttons.b.x, (
+            "Infinite solutions"
+        )
         a = Fraction(
             buttons.b.y * target.x - buttons.b.x * target.y,
             buttons.a.x * buttons.b.y - buttons.a.y * buttons.b.x,
@@ -94,7 +96,9 @@ def main():
     for target, buttons in problems:
         target = State(x=target.x + 10000000000000, y=target.y + 10000000000000, tok=None)
 
-        assert buttons.a.x * buttons.b.y != buttons.a.y * buttons.b.x, "Infinite solutions"
+        assert buttons.a.x * buttons.b.y != buttons.a.y * buttons.b.x, (
+            "Infinite solutions"
+        )
         a = Fraction(
             buttons.b.y * target.x - buttons.b.x * target.y,
             buttons.a.x * buttons.b.y - buttons.a.y * buttons.b.x,

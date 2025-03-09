@@ -33,9 +33,15 @@ def walk_straight(pos, map_):
         map_[pos.row, pos.col] = STEPPED_TILE
         last_pos = pos
         pos = Position(
-            pos.row + DIRECTION_STEP[pos.dir][0], pos.col + DIRECTION_STEP[pos.dir][1], pos.dir
+            pos.row + DIRECTION_STEP[pos.dir][0],
+            pos.col + DIRECTION_STEP[pos.dir][1],
+            pos.dir,
         )
-    return last_pos if (0 <= pos.row < map_.shape[0] and 0 <= pos.col < map_.shape[1]) else None
+    return (
+        last_pos
+        if (0 <= pos.row < map_.shape[0] and 0 <= pos.col < map_.shape[1])
+        else None
+    )
 
 
 def stuck_in_loop(pos, map_):
@@ -43,14 +49,19 @@ def stuck_in_loop(pos, map_):
     stepped = set()
     while 0 <= pos.row < map_.shape[0] and 0 <= pos.col < map_.shape[1]:
         stepped.add(pos)
-        if map_[pos.row, pos.col] == OBSTACLE or map_[pos.row, pos.col] == NEW_OBSTRUCTION:
+        if (
+            map_[pos.row, pos.col] == OBSTACLE
+            or map_[pos.row, pos.col] == NEW_OBSTRUCTION
+        ):
             pos = Position(
                 pos.row - DIRECTION_STEP[pos.dir][0],
                 pos.col - DIRECTION_STEP[pos.dir][1],
                 (pos.dir + 1) % 4,
             )
         pos = Position(
-            pos.row + DIRECTION_STEP[pos.dir][0], pos.col + DIRECTION_STEP[pos.dir][1], pos.dir
+            pos.row + DIRECTION_STEP[pos.dir][0],
+            pos.col + DIRECTION_STEP[pos.dir][1],
+            pos.dir,
         )
         if pos in stepped:
             return True

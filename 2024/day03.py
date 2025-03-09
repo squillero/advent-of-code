@@ -22,7 +22,9 @@ def main():
 
     # --- Part Two ---
     result = 0
-    enabled = re.findall(r'''(?:(?<=do\(\))|^)(.*?)(?:(?=don't\(\))|$)''', text, flags=re.DOTALL)
+    enabled = re.findall(
+        r'''(?:(?<=do\(\))|^)(.*?)(?:(?=don't\(\))|$)''', text, flags=re.DOTALL
+    )
     for x, y in re.findall(ops, ' '.join(enabled)):
         result += int(x) * int(y)
     ic(result)

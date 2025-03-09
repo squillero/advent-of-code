@@ -52,7 +52,10 @@ def main():
             q[1] += 1
         elif 0 <= r.x < SPACE_WIDTH // 2 and r.y >= SPACE_HEIGHT - SPACE_HEIGHT // 2:
             q[2] += 1
-        elif r.x >= SPACE_WIDTH - SPACE_WIDTH // 2 and r.y >= SPACE_HEIGHT - SPACE_HEIGHT // 2:
+        elif (
+            r.x >= SPACE_WIDTH - SPACE_WIDTH // 2
+            and r.y >= SPACE_HEIGHT - SPACE_HEIGHT // 2
+        ):
             q[3] += 1
 
     safety_factor = reduce(mul, q)

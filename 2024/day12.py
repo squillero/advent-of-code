@@ -84,7 +84,9 @@ def main():
     discounted_price = 0
     while pos := find_region(garden):
         area = flood(garden, pos)
-        *_, borders = accumulate(area, lambda x, p: x + list(p.neighbors - area), initial=list())
+        *_, borders = accumulate(
+            area, lambda x, p: x + list(p.neighbors - area), initial=list()
+        )
         price += len(area) * len(borders)
 
         sides = 0

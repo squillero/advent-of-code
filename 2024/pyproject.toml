@@ -2,13 +2,15 @@
 # Copyright 2024-25 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
+[project]
+    name        = "AoC"
+    authors     = [{ name = "Giovanni Squillero", email = "squillero@polito.it" }]
+    license     = "0BSD"
+    version     = "0.1.0"
+    description = "Advent of Code"
+    readme      = "README.md"
+
 [tool.poetry]
-    name         = "AoC"
-    version      = "0.1.0"
-    description  = "Advent of Code"
-    authors      = ["Giovanni Squillero <squillero@polito.it>"]
-    license      = "0BSD"
-    readme       = "README.md"
     package-mode = false
 
     [tool.poetry.dependencies]
@@ -19,10 +21,10 @@
 
 [tool.ruff]
     target-version = "py313"
+    line-length    = 90
+
+    [tool.ruff.format]
+        quote-style = "preserve"
 
     [tool.ruff.lint]
         ignore = ['E741']
-
-[build-system]
-    requires      = ["poetry-core"]
-    build-backend = "poetry.core.masonry.api"

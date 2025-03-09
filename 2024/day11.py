@@ -16,7 +16,10 @@ RULES = [
     Rule(condition=lambda s: s == 0, transformation=lambda s: [1]),
     Rule(
         condition=lambda s: len(str(s)) % 2 == 0,
-        transformation=lambda s: [int(str(s)[: len(str(s)) // 2]), int(str(s)[len(str(s)) // 2 :])],
+        transformation=lambda s: [
+            int(str(s)[: len(str(s)) // 2]),
+            int(str(s)[len(str(s)) // 2 :]),
+        ],
     ),
     Rule(condition=lambda s: True, transformation=lambda s: [s * 2024]),
 ]
