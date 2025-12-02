@@ -34,7 +34,7 @@ def invalid_ids_p2(num_digits):
     return invalid
 
 
-# First idea: create all illegal ids and check if they are in range
+# First idea: create all illegal ids and check if they are inside the range
 def generate_all_illegal_ids(id_ranges):
     # Part 1
     tot_invalid = 0
@@ -56,7 +56,7 @@ def generate_all_illegal_ids(id_ranges):
     ic(tot_invalid)
 
 
-# Second idea: create a check for illegal ones using regex
+# Second idea: generate all ids in range and check them using regex
 def generate_all_ids(id_ranges):
     pattern = re.compile(r'^(.+)\1$')
     tot_invalid = 0
