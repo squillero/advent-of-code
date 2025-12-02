@@ -13,8 +13,7 @@ def part_one(file_name):
     password = 0
     with open(file_name) as file:
         for line in file:
-            d, offset = line[0], int(line[1:])
-            dial += offset if d == 'R' else -offset
+            dial += int(line[1:]) if line[0] == 'R' else -int(line[1:])
             if dial % 100 == 0:
                 password += 1
     return password
