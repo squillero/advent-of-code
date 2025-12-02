@@ -173,8 +173,12 @@ cython_debug/
 # MacOS
 .DS_Store
 
+# RUFF
+.ruff_cache
+
 # ADVENT OF CODE specific
 day00.py
 poetry.lock
+uv.lock
 day*-*.txt
 .vscode
