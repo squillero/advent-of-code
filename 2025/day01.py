@@ -11,7 +11,7 @@ INPUT_FILE_NAME = 'day01-input.txt'
 def part_one(file_name):
     dial = 50
     password = 0
-    with open(INPUT_FILE_NAME) as file:
+    with open(file_name) as file:
         for line in file:
             d, offset = line[0], int(line[1:])
             dial += offset if d == 'R' else -offset
@@ -23,7 +23,7 @@ def part_one(file_name):
 def part_two(file_name):
     dial = 50
     password = 0
-    with open(INPUT_FILE_NAME) as file:
+    with open(file_name) as file:
         for line in file:
             step = +1 if line[0] == 'R' else -1
             for _ in range(abs(int(line[1:]))):
