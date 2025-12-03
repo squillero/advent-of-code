@@ -50,6 +50,7 @@ def solve_by_generating(id_ranges):
 
 # Second idea: generate all ids in range and check them using regex
 def solve_by_checking(id_ranges):
+    # Part 1
     pattern = re.compile(r'^(.+)\1$')
     tot_invalid = 0
     for from_, to_ in id_ranges:
@@ -58,6 +59,7 @@ def solve_by_checking(id_ranges):
                 tot_invalid += n
     ic(tot_invalid)
 
+    # Part 2
     pattern = re.compile(r'^(.+)\1+$')
     tot_invalid = 0
     for from_, to_ in id_ranges:
