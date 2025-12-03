@@ -180,5 +180,5 @@ cython_debug/
 day00.py
 poetry.lock
 uv.lock
-day*-*.txt
+day*-input.txt
 .vscode

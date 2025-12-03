@@ -5,23 +5,24 @@
 from itertools import combinations
 from icecream import ic
 
-# INPUT_FILE_NAME = 'day03-test.txt'
-INPUT_FILE_NAME = 'day03-input.txt'
+INPUT_FILE_NAME = 'day03-test.txt'
+# INPUT_FILE_NAME = 'day03-input.txt'
 
 
 def main():
     with open(INPUT_FILE_NAME) as file:
         batteries = file.read().split()
 
-    # easy problem, one-liner
+    NUM_BATTERIES = 2
+    # easy one-liner
     total_joltage = 0
     for battery in batteries:
-        total_joltage += max(int(a + b) for a, b in combinations(battery, 2))
+        total_joltage += max(int(a + b) for a, b in combinations(battery, NUM_BATTERIES))
     ic(total_joltage)
 
-    # 12 batteries are too much for using `combinations`
-    # idea: pick the biggest battery, but leaving enough batteries after it
     NUM_BATTERIES = 12
+    # that would be 1,050,421,051,106,700 combinations per line...
+    # let pick the biggest battery, leaving enough batteries to complete the pack
     total_joltage = 0
     for battery in batteries:
         selected = ''

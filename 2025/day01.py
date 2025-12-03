@@ -5,7 +5,7 @@
 from icecream import ic
 
 INPUT_FILE_NAME = 'day01-test.txt'
-INPUT_FILE_NAME = 'day01-input.txt'
+# INPUT_FILE_NAME = 'day01-input.txt'
 
 
 def part_one(file_name):
