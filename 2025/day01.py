@@ -8,7 +8,7 @@ INPUT_FILE_NAME = 'day01-test.txt'
 # INPUT_FILE_NAME = 'day01-input.txt'
 
 
-def part_one(file_name):
+def part_one(file_name: str) -> int:
     dial = 50
     password = 0
     with open(file_name) as file:
@@ -19,7 +19,7 @@ def part_one(file_name):
     return password
 
 
-def part_two(file_name):
+def part_two(file_name: str) -> int:
     dial = 50
     password = 0
     with open(file_name) as file:

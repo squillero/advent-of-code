@@ -10,17 +10,17 @@ INPUT_FILE_NAME = 'day02-test.txt'
 # INPUT_FILE_NAME = 'day02-input.txt'
 
 
-def make_id(num_symbols) -> set[str]:
+def make_id(num_symbols: int) -> set[str]:
     r"""Generate a set of valid ids of length `num_symbols`"""
     return set(''.join(i) for i in product('0123456789', repeat=num_symbols) if i[0] != '0')
 
 
-def invalid_ids_p1(num_digits):
+def invalid_ids_p1(num_digits: int) -> set[str]:
     r"""Generate the set of all **invalid** ids of length `num_digits` (part 1)"""
     return set(id_ * 2 for id_ in make_id(num_digits // 2)) if num_digits % 2 == 0 else set()
 
 
-def invalid_ids_p2(num_digits):
+def invalid_ids_p2(num_digits: int) -> set[str]:
     r"""Generate the set of all **invalid** ids of length `num_digits` (part 2)"""
     invalid = set()
     for n in range(1, num_digits):
@@ -30,7 +30,7 @@ def invalid_ids_p2(num_digits):
 
 
 # First idea: create all illegal ids and check if they are inside the range
-def solve_by_generating(id_ranges):
+def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
     # Part 1
     tot_invalid = 0
     for from_, to_ in id_ranges:
@@ -49,7 +49,7 @@ def solve_by_generating(id_ranges):
 
 
 # Second idea: generate all ids in range and check them using regex
-def solve_by_checking(id_ranges):
+def solve_by_checking(id_ranges: list[tuple[str, str]]) -> None:
     # Part 1
     pattern = re.compile(r'^(.+)\1$')
     tot_invalid = 0
