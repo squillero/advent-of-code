@@ -6,8 +6,8 @@ from itertools import product
 import numpy as np
 from icecream import ic
 
-# INPUT_FILE_NAME = 'day04-test.txt'
-INPUT_FILE_NAME = 'day04-input.txt'
+INPUT_FILE_NAME = 'day04-test.txt'
+# INPUT_FILE_NAME = 'day04-input.txt'
 
 
 # An easy NumPy excercise.
