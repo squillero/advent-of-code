@@ -7,18 +7,23 @@ from icecream import ic
 INPUT_FILE_NAME = 'day01-test.txt'
 # INPUT_FILE_NAME = 'day01-input.txt'
 
+TOTAL_TICKS = 100
 
+
+# Just roll...
+# Notez bien: No need to reset the dial (-1 % 100 == 99)
 def part_one(file_name: str) -> int:
     dial = 50
     password = 0
     with open(file_name) as file:
         for line in file:
             dial += int(line[1:]) if line[0] == 'R' else -int(line[1:])
-            if dial % 100 == 0:
+            if dial % TOTAL_TICKS == 0:
                 password += 1
     return password
 
 
+# Just roll, one click at a time.
 def part_two(file_name: str) -> int:
     dial = 50
     password = 0
@@ -27,7 +32,7 @@ def part_two(file_name: str) -> int:
             step = +1 if line[0] == 'R' else -1
             for _ in range(abs(int(line[1:]))):
                 dial += step
-                if dial % 100 == 0:
+                if dial % TOTAL_TICKS == 0:
                     password += 1
     return password
 

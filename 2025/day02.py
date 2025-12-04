@@ -10,6 +10,7 @@ INPUT_FILE_NAME = 'day02-test.txt'
 # INPUT_FILE_NAME = 'day02-input.txt'
 
 
+# Helper functions
 def make_id(num_symbols: int) -> set[str]:
     r"""Generate a set of valid ids of length `num_symbols`"""
     return set(''.join(i) for i in product('0123456789', repeat=num_symbols) if i[0] != '0')
@@ -29,8 +30,11 @@ def invalid_ids_p2(num_digits: int) -> set[str]:
     return invalid
 
 
-# First idea: create all illegal ids and check if they are inside the range
+# First idea: create all illegal ids and check if they are inside the ranges.
+# Probably faster if the ranges are huge.
 def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
+    r"""Display the sum of all invalid ids in a list of ranges"""
+
     # Part 1
     tot_invalid = 0
     for from_, to_ in id_ranges:
@@ -48,23 +52,26 @@ def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
     ic(tot_invalid)
 
 
-# Second idea: generate all ids in range and check them using regex
+# Second idea: generate all ids in the ranges and check if they are valid
+# using a regex. Probably slower, but regexs are trivial.
 def solve_by_checking(id_ranges: list[tuple[str, str]]) -> None:
+    r"""Display the sum of all invalid ids in a list of ranges"""
+
     # Part 1
-    pattern = re.compile(r'^(.+)\1$')
+    invalid = re.compile(r'^(.+)\1$')
     tot_invalid = 0
     for from_, to_ in id_ranges:
         for n in range(int(from_), int(to_) + 1):
-            if pattern.match(str(n)):
+            if invalid.match(str(n)):
                 tot_invalid += n
     ic(tot_invalid)
 
     # Part 2
-    pattern = re.compile(r'^(.+)\1+$')
+    invalid = re.compile(r'^(.+)\1+$')
     tot_invalid = 0
     for from_, to_ in id_ranges:
         for n in range(int(from_), int(to_) + 1):
-            if pattern.match(str(n)):
+            if invalid.match(str(n)):
                 tot_invalid += n
     ic(tot_invalid)
 
