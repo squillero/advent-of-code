@@ -31,7 +31,7 @@ def cephalopod_math(filename):
     return result
 
 
-# A lot of parsing... reading by columns yield different numbers of operands
+# A lot of parsing... reading by columns yields different numbers of operands
 def cephalopod_math_inverted(filename):
     r"""Solve cephalopod math worksheet, cephalopod-style"""
 
