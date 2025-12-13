@@ -25,9 +25,9 @@ def cephalopod_math(filename):
     result = 0
     for col, op in enumerate(ops):
         if op == '*':
-            result += reduce(operator.mul, nums[:, col], initial=1)
+            result += reduce(operator.mul, nums[:, col], 1)
         elif op == '+':
-            result += reduce(operator.add, nums[:, col], initial=0)
+            result += reduce(operator.add, nums[:, col], 0)
     return result
 
 
