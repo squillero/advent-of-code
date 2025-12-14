@@ -2,8 +2,7 @@
 # Copyright 2025 by Giovanni Squillero
 # SPDX-License-Identifier: 0BSD
 
-from collections import Counter
-from dataclasses import dataclass
+from collections import Counter, namedtuple
 from functools import reduce
 from itertools import combinations
 from operator import mul
@@ -18,16 +17,7 @@ INPUT_FILE_NAME = 'day08-input.txt'
 MAX_CONNECTIONS = 1_000
 
 
-@dataclass(unsafe_hash=True, slots=True)
-class JunctionBox:
-    x: int
-    y: int
-    z: int
-
-    def __init__(self, x, y, z):
-        self.x = int(x)
-        self.y = int(y)
-        self.z = int(z)
+JunctionBox = namedtuple('JunctionBox', ['x', 'y', 'z'])
 
 
 def d(j1: JunctionBox, j2: JunctionBox) -> float:
@@ -47,7 +37,7 @@ def join_circuits(jboxes: dict[JunctionBox, int], j1: JunctionBox, j2: JunctionB
 
 def main():
     with open(INPUT_FILE_NAME) as file:
-        jboxes = {JunctionBox(*line.split(',')): 0 for line in file}
+        jboxes = {JunctionBox(*map(int, line.split(','))): 0 for line in file}
 
     # Aux data
     sorted_junctions = sorted(
