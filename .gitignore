@@ -181,5 +181,6 @@ day00.py
 poetry.lock
 uv.lock
 day*-input.txt
+*.tmp
 .vscode
 scratch.ipynb
