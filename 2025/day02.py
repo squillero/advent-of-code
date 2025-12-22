@@ -12,17 +12,17 @@ INPUT_FILE_NAME = 'day02-test.txt'
 
 # Helper functions
 def make_id(num_symbols: int) -> set[str]:
-    r"""Generate a set of valid ids of length `num_symbols`"""
+    """Generate a set of valid ids of length `num_symbols`"""
     return set(''.join(i) for i in product('0123456789', repeat=num_symbols) if i[0] != '0')
 
 
 def invalid_ids_p1(num_digits: int) -> set[str]:
-    r"""Generate the set of all **invalid** ids of length `num_digits` (part 1)"""
+    """Generate the set of all **invalid** ids of length `num_digits` (part 1)"""
     return set(id_ * 2 for id_ in make_id(num_digits // 2)) if num_digits % 2 == 0 else set()
 
 
 def invalid_ids_p2(num_digits: int) -> set[str]:
-    r"""Generate the set of all **invalid** ids of length `num_digits` (part 2)"""
+    """Generate the set of all **invalid** ids of length `num_digits` (part 2)"""
     invalid = set()
     for n in range(1, num_digits):
         if num_digits % n == 0:
@@ -33,7 +33,7 @@ def invalid_ids_p2(num_digits: int) -> set[str]:
 # First idea: create all illegal ids and check if they are inside the ranges.
 # Probably faster if the ranges are huge.
 def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
-    r"""Display the sum of all invalid ids in a list of ranges"""
+    """Display the sum of all invalid ids in a list of ranges"""
 
     # Part 1
     tot_invalid = 0
@@ -55,7 +55,7 @@ def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
 # Second idea: generate all ids in the ranges and check if they are valid
 # using a regex. Probably slower, but regexs are trivial.
 def solve_by_checking(id_ranges: list[tuple[str, str]]) -> None:
-    r"""Display the sum of all invalid ids in a list of ranges"""
+    """Display the sum of all invalid ids in a list of ranges"""
 
     # Part 1
     invalid = re.compile(r'^(.+)\1$')

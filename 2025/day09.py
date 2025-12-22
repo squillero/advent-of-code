@@ -8,19 +8,19 @@ from itertools import combinations
 import numpy as np
 from icecream import ic
 
-# INPUT_FILE_NAME = 'day09-test.txt'
-INPUT_FILE_NAME = 'day09-input.txt'
+INPUT_FILE_NAME = 'day09-test.txt'
+# INPUT_FILE_NAME = 'day09-input.txt'
 
 Tile = namedtuple('Tile', ['x', 'y'])
 
 
 def area(t1: Tile, t2: Tile) -> int:
-    r"""Calculate the are of the square t1-t2"""
+    """Calculate the are of the square t1-t2"""
     return (abs(t1.x - t2.x) + 1) * (abs(t1.y - t2.y) + 1)
 
 
 def check_green(green_range, t1, t2):
-    r"""Check if the square t1-t2 (whatever order) fits into the green area"""
+    """Check if the square t1-t2 (whatever order) fits into the green area"""
     xs, ys = min(t1.x, t2.x), min(t1.y, t2.y)
     xe, ye = max(t1.x, t2.x), max(t1.y, t2.y)
     return np.all(green_range[ys : ye + 1, 0] <= xs) and np.all(green_range[ys : ye + 1, 1] >= xe)

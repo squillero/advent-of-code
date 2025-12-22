@@ -7,7 +7,7 @@ from icecream import ic
 
 
 INPUT_FILE_NAME = 'day07-test.txt'
-INPUT_FILE_NAME = 'day07-input.txt'
+# INPUT_FILE_NAME = 'day07-input.txt'
 
 EMPTY = '.'
 BEAM = '|'
@@ -16,7 +16,7 @@ START = 'S'
 
 
 def count_splits(diagram):
-    r"""Count number of splits."""
+    """Count number of splits."""
 
     diagram_width = len(diagram[0])
     splits = 0
@@ -40,7 +40,7 @@ def count_splits(diagram):
 
 
 def count_timelines(diagram):
-    r"""Count number of alternative timelines."""
+    """Count number of alternative timelines."""
 
     diagram_width = len(diagram[0])
 

@@ -13,20 +13,20 @@ from icecream import ic
 INPUT_FILE_NAME = 'day08-test.txt'
 MAX_CONNECTIONS = 10
 
-INPUT_FILE_NAME = 'day08-input.txt'
-MAX_CONNECTIONS = 1_000
+# INPUT_FILE_NAME = 'day08-input.txt'
+# MAX_CONNECTIONS = 1_000
 
 
 JunctionBox = namedtuple('JunctionBox', ['x', 'y', 'z'])
 
 
 def d(j1: JunctionBox, j2: JunctionBox) -> float:
-    r"""Calculate distance between two junctions"""
+    """Calculate distance between two junctions"""
     return ((j1.x - j2.x) ** 2 + (j1.y - j2.y) ** 2 + (j1.z - j2.z) ** 2) ** 0.5
 
 
 def join_circuits(jboxes: dict[JunctionBox, int], j1: JunctionBox, j2: JunctionBox):
-    r"""Join circuits j1 and j2"""
+    """Join circuits j1 and j2"""
     if jboxes[j1] == jboxes[j2]:
         return  # not really needed, but maybe a little bit faster
     new_circuit = min(jboxes[j1], jboxes[j2])
