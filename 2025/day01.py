@@ -13,7 +13,7 @@ TOTAL_TICKS = 100
 # Just roll...
 # Notez bien: No need to reset the dial (-1 % 100 == 99).
 def part_one(file_name: str) -> int:
-    """Turn dial and check position at the end"""
+    """Turn dial and check position at the end."""
 
     dial = 50
     password = 0
@@ -27,7 +27,7 @@ def part_one(file_name: str) -> int:
 
 # Almost the same, just one click at a time.
 def part_two(file_name: str) -> int:
-    """Turn dial and check position after each tick"""
+    """Turn dial and check position after each tick."""
 
     dial = 50
     password = 0

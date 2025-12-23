@@ -12,7 +12,7 @@ INPUT_FILE_NAME = 'day04-test.txt'
 
 # An easy NumPy excercise.
 def count_accessible_rolls_part1(grid: np.ndarray) -> int:
-    """Count rolls of paper can be accessed by a forklift"""
+    """Count rolls of paper can be accessed by a forklift."""
 
     dimx, dimy = grid.shape
     adjacent_rolls = np.astype(grid == '@', int)
@@ -26,7 +26,7 @@ def count_accessible_rolls_part1(grid: np.ndarray) -> int:
 
 # An easy NumPy excercise (I love NumPy boolean masks!).
 def count_accessible_rolls_part2(grid: np.ndarray) -> int:
-    """Count rolls of paper can be accessed by a forklift (part2)"""
+    """Count rolls of paper can be accessed by a forklift (part2)."""
 
     dimx, dimy = grid.shape
 

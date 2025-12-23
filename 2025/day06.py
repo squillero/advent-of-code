@@ -13,7 +13,7 @@ INPUT_FILE_NAME = 'day06-input.txt'
 
 # Yet another NumPy excercise, reasonably clean.
 def cephalopod_math(filename):
-    """Solve cephalopod math worksheet"""
+    """Solve cephalopod math worksheet."""
 
     # Read worksheet
     with open(filename) as file:
@@ -33,7 +33,7 @@ def cephalopod_math(filename):
 
 # A lot of parsing... reading by columns yields different numbers of operands.
 def cephalopod_math_inverted(filename):
-    """Solve cephalopod math worksheet, cephalopod-style"""
+    """Solve cephalopod math worksheet, cephalopod-style."""
 
     # Extract numbers column by column. Notez bien: This code sucks!
     with open(INPUT_FILE_NAME) as file:

@@ -13,6 +13,7 @@ def main():
     with open(INPUT_FILE_NAME) as file:
         batteries = file.read().split()
 
+    # = [Part 1] ============================================================
     NUM_BATTERIES = 2
     # Easy one-liner...
     total_joltage = 0
@@ -20,6 +21,7 @@ def main():
         total_joltage += max(int(a + b) for a, b in combinations(battery, NUM_BATTERIES))
     ic(total_joltage)
 
+    # = [Part 2] ============================================================
     NUM_BATTERIES = 12
     # Yeuch, that would be 1,050,421,051,106,700 combinations for each bank...
     # Let select the batteries with the biggest joltage one by one.

@@ -48,7 +48,7 @@ def main():
         ((j1, j2) for j1, j2 in combinations(jboxes.keys(), r=2)), key=lambda j: d(*j)
     )
 
-    # Part 1
+    # = [Part 1] ============================================================
     for n, k in enumerate(jboxes.keys()):
         jboxes[k] = n + 1  # reset circuits
     for j1, j2 in sorted_junctions[:MAX_CONNECTIONS]:
@@ -58,7 +58,7 @@ def main():
     check = reduce(mul, (v for _, v in cnt.most_common(3)), 1)
     ic(check)
 
-    # Part 2
+    # = [Part 2] ============================================================
     for n, k in enumerate(jboxes.keys()):
         jboxes[k] = n + 1  # reset circuits
     while len(set(jboxes.values())) > 1:

@@ -16,13 +16,15 @@ def main():
     with open(INPUT_FILE_NAME) as file:
         ranges_raw, ingredient_raw = file.read().split('\n\n')
 
-    # Part1: An excercise on list comprehension & generators.
+    # = [Part 1] ============================================================
+    # An excercise on list comprehension & generators.
     ranges = {Range(*map(int, line.split('-'))) for line in ranges_raw.split()}
     ingredients = [int(i) for i in ingredient_raw.split()]
     fresh_count = sum(any(rs <= i <= re for rs, re in ranges) for i in ingredients)
     ic(fresh_count)
 
-    # Part2: A little bit of joining & pruning.
+    # = [Part 2] ============================================================
+    # A little bit of joining & pruning.
     stable = False
     while not stable:
         for s1, s2 in combinations(sorted(ranges), r=2):
