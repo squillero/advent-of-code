@@ -15,6 +15,7 @@ SPLITTER = '^'
 START = 'S'
 
 
+# Draw the beams on the floor row by row, and count.
 def count_splits(diagram):
     """Count number of splits."""
 
@@ -34,17 +35,16 @@ def count_splits(diagram):
                     current_line[i - 1] = BEAM
                 if i < diagram_width - 1:
                     current_line[i + 1] = BEAM
-    # for line in diagram:
-    #    print(''.join(line))
     return splits
 
 
+# Draw on the floor row by row, and keep track of beams' multiplicity.
 def count_timelines(diagram):
     """Count number of alternative timelines."""
 
     diagram_width = len(diagram[0])
 
-    # Convert diagram to number
+    # Convert diagram to number.
     MAP = {EMPTY: 0, SPLITTER: -1, START: 1}
     diagram = [[MAP[s] for s in line] for line in diagram]
 

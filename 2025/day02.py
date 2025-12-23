@@ -9,8 +9,11 @@ from icecream import ic
 INPUT_FILE_NAME = 'day02-test.txt'
 # INPUT_FILE_NAME = 'day02-input.txt'
 
+##############################################################################
+# HELPER FUNCTIONS
+##############################################################################
 
-# Helper functions
+
 def make_id(num_symbols: int) -> set[str]:
     """Generate a set of valid ids of length `num_symbols`"""
     return set(''.join(i) for i in product('0123456789', repeat=num_symbols) if i[0] != '0')
@@ -30,6 +33,7 @@ def invalid_ids_p2(num_digits: int) -> set[str]:
     return invalid
 
 
+##############################################################################
 # First idea: create all illegal ids and check if they are inside the ranges.
 # Probably faster if the ranges are huge.
 def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
@@ -52,6 +56,7 @@ def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
     ic(tot_invalid)
 
 
+##############################################################################
 # Second idea: generate all ids in the ranges and check if they are valid
 # using a regex. Probably slower, but regexs are trivial.
 def solve_by_checking(id_ranges: list[tuple[str, str]]) -> None:

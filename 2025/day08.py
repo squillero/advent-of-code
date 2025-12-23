@@ -25,8 +25,10 @@ def d(j1: JunctionBox, j2: JunctionBox) -> float:
     return ((j1.x - j2.x) ** 2 + (j1.y - j2.y) ** 2 + (j1.z - j2.z) ** 2) ** 0.5
 
 
+# Idea: circuit's id == smallest jbox's id in the circuit (jboxes[x]).
 def join_circuits(jboxes: dict[JunctionBox, int], j1: JunctionBox, j2: JunctionBox):
     """Join circuits j1 and j2"""
+
     if jboxes[j1] == jboxes[j2]:
         return  # not really needed, but maybe a little bit faster
     new_circuit = min(jboxes[j1], jboxes[j2])
@@ -41,14 +43,14 @@ def main():
     with open(INPUT_FILE_NAME) as file:
         jboxes = {JunctionBox(*map(int, line.split(','))): 0 for line in file}
 
-    # List of all junction pairs, sorted by distance
+    # List of all junction pairs, sorted by distance.
     sorted_junctions = sorted(
         ((j1, j2) for j1, j2 in combinations(jboxes.keys(), r=2)), key=lambda j: d(*j)
     )
 
     # Part 1
     for n, k in enumerate(jboxes.keys()):
-        jboxes[k] = n + 1
+        jboxes[k] = n + 1  # reset circuits
     for j1, j2 in sorted_junctions[:MAX_CONNECTIONS]:
         join_circuits(jboxes, j1, j2)
     cnt = Counter(jboxes.values())
@@ -58,7 +60,7 @@ def main():
 
     # Part 2
     for n, k in enumerate(jboxes.keys()):
-        jboxes[k] = n + 1
+        jboxes[k] = n + 1  # reset circuits
     while len(set(jboxes.values())) > 1:
         j1, j2 = sorted_junctions.pop(0)
         join_circuits(jboxes, j1, j2)

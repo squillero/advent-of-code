@@ -21,7 +21,7 @@ def cephalopod_math(filename):
     nums = np.array(raw[:-1], dtype=int)
     ops = raw[-1]
 
-    # Do math
+    # Do math.
     result = 0
     for col, op in enumerate(ops):
         if op == '*':
@@ -31,11 +31,11 @@ def cephalopod_math(filename):
     return result
 
 
-# A lot of parsing... reading by columns yields different numbers of operands
+# A lot of parsing... reading by columns yields different numbers of operands.
 def cephalopod_math_inverted(filename):
     """Solve cephalopod math worksheet, cephalopod-style"""
 
-    # Extract numbers column by column. Notez bien: This code sucks.
+    # Extract numbers column by column. Notez bien: This code sucks!
     with open(INPUT_FILE_NAME) as file:
         raw = np.array([list(line[:-1]) for line in file])
     tmp = raw[:, ::-1]
@@ -53,7 +53,7 @@ def cephalopod_math_inverted(filename):
             line = list()
     nums.append(line)
 
-    # Do math
+    # Do math.
     result = 0
     for data, op in zip(nums, ops):
         if op == '*':

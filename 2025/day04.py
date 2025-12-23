@@ -10,7 +10,7 @@ INPUT_FILE_NAME = 'day04-test.txt'
 # INPUT_FILE_NAME = 'day04-input.txt'
 
 
-# An easy NumPy excercise
+# An easy NumPy excercise.
 def count_accessible_rolls_part1(grid: np.ndarray) -> int:
     """Count rolls of paper can be accessed by a forklift"""
 
@@ -24,7 +24,7 @@ def count_accessible_rolls_part1(grid: np.ndarray) -> int:
     return accessible_rolls.sum()
 
 
-# An easy NumPy excercise -- I love NumPy boolean masks!
+# An easy NumPy excercise (I love NumPy boolean masks!).
 def count_accessible_rolls_part2(grid: np.ndarray) -> int:
     """Count rolls of paper can be accessed by a forklift (part2)"""
 
