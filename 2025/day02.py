@@ -39,7 +39,7 @@ def invalid_ids_p2(num_digits: int) -> set[str]:
 def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
     """Display the sum of all invalid ids in a list of ranges."""
 
-    # = [Part 1] ============================================================
+    # = [Part 1] ==================================================================================
     tot_invalid = 0
     for from_, to_ in id_ranges:
         for id_ in set.union(*[invalid_ids_p1(d) for d in range(len(from_), len(to_) + 1)]):
@@ -47,7 +47,7 @@ def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
                 tot_invalid += int(id_)
     ic(tot_invalid)
 
-    # = [Part 2] ============================================================
+    # = [Part 2] ==================================================================================
     tot_invalid = 0
     for from_, to_ in id_ranges:
         for id_ in set.union(*[invalid_ids_p2(d) for d in range(len(from_), len(to_) + 1)]):

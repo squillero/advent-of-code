@@ -30,12 +30,12 @@ def main():
     with open(INPUT_FILE_NAME) as file:
         red_tiles = [Tile(*map(int, line.split(','))) for line in file]
 
-    # = [Part 1] ============================================================
+    # = [Part 1] ==================================================================================
     # Simplistic one liner.
     t1, t2 = max(combinations(red_tiles, r=2), key=lambda t: area(*t))
     ic(t1, t2, area(t1, t2))
 
-    # = [Part 2] ============================================================
+    # = [Part 2] ==================================================================================
     # For each row (y) calculate the extension of the green area (x_min, x_max)
     # then use the same, old, simplistic one liner on valid corners only.
     green_range = np.empty((1 + max(t.y for t in red_tiles), 2), dtype=int)
