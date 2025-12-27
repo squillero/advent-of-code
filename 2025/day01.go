@@ -5,7 +5,6 @@
 package main
 
 import (
-	// "log/slog"
 	"bufio"
 	"log"
 	"os"
@@ -14,13 +13,15 @@ import (
 
 const FileName string = "day01-test.txt"
 
+// const FileName string = "day01-input.txt"
+
 func main() {
 	// Slurp file
 	turns := ReadFile(FileName)
 
 	// Part 1
-	password := 0
 	dial := 50
+	password := 0
 	for _, turn := range turns {
 		dial += turn
 		if dial%100 == 0 {
@@ -30,8 +31,8 @@ func main() {
 	log.Printf("Password (part 1): %v\n", password)
 
 	// Part 2
-	password = 0
 	dial = 50
+	password = 0
 	for _, turn := range turns {
 		var tick, count int
 		if turn > 0 {
@@ -63,10 +64,11 @@ func ReadFile(fileName string) []int {
 	for scanner.Scan() {
 		line := scanner.Text()
 		t, _ := strconv.Atoi(line[1:])
-		if rune(line[0]) == 'L' {
-			t = -t
+		if rune(line[0]) == 'R' {
+			movements = append(movements, t)
+		} else {
+			movements = append(movements, -t)
 		}
-		movements = append(movements, t)
 	}
 	return movements
 }
