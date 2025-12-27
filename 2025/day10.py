@@ -62,7 +62,7 @@ class Machine:
 
 
 def main():
-    pattern = re.compile(r"\[(?P<diagram>.*)\]\s*(?P<buttons>.*)\s*\{(?P<joltage>.*)\}")
+    pattern = re.compile(r'\[(?P<diagram>.*)\]\s*(?P<buttons>.*)\s*\{(?P<joltage>.*)\}')
 
     machines = list()
     with open(INPUT_FILE_NAME) as file:
