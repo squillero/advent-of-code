@@ -22,8 +22,8 @@ func main() {
 	// Part 1
 	dial := 50
 	password := 0
-	for _, turn := range turns {
-		dial += turn
+	for _, ticks := range turns {
+		dial += ticks
 		if dial%100 == 0 {
 			password += 1
 		}
@@ -33,14 +33,14 @@ func main() {
 	// Part 2
 	dial = 50
 	password = 0
-	for _, turn := range turns {
+	for _, tickCounter := range turns {
 		var tick, count int
-		if turn > 0 {
+		if tickCounter > 0 {
 			tick = 1
-			count = turn
+			count = tickCounter
 		} else {
 			tick = -1
-			count = -turn
+			count = -tickCounter
 		}
 		for t := 0; t < count; t += 1 {
 			dial += tick
