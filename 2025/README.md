@@ -2,6 +2,9 @@
 
 > https://adventofcode.com/2025/
 
-Note: Just `go run ./day01` from main dir. Go is confused when different sources define functions with the same name in the same directory.
+```shell
+$ uv run ./dayXX/dayXX.py   # Python
+$ go run ./dayXX/dayXX.go   # Go
+```
 
 Also check out my friends' work from [**B-AROL-O**](https://github.com/B-AROL-O/advent-of-code/tree/main/2025).
