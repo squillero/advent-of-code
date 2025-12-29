@@ -9,9 +9,10 @@ from icecream import ic
 INPUT_FILE_NAME = 'day02-test.txt'
 # INPUT_FILE_NAME = 'day02-input.txt'
 
-##############################################################################
+
+###############################################################################################
 # HELPER FUNCTIONS
-##############################################################################
+###############################################################################################
 
 
 def make_id(num_symbols: int) -> set[str]:
@@ -33,9 +34,12 @@ def invalid_ids_p2(num_digits: int) -> set[str]:
     return invalid
 
 
-##############################################################################
+###############################################################################################
 # First idea: create all illegal ids and check if they are inside the ranges.
 # Probably faster if the ranges are huge.
+###############################################################################################
+
+
 def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
     """Display the sum of all invalid ids in a list of ranges."""
 
@@ -56,13 +60,16 @@ def solve_by_generating(id_ranges: list[tuple[str, str]]) -> None:
     ic(tot_invalid)
 
 
-##############################################################################
-# Second idea: generate all ids in the ranges and check if they are valid
-# using a regex. Probably slower, but regexs are trivial.
+###############################################################################################
+# Second idea: generate all ids in the ranges and check if they are valid using a regex.
+# Probably slower, but regexs are trivial as SRE supports backreferences.
+###############################################################################################
+
+
 def solve_by_checking(id_ranges: list[tuple[str, str]]) -> None:
     """Display the sum of all invalid ids in a list of ranges"""
 
-    # Part 1
+    # = [Part 1] ==================================================================================
     invalid = re.compile(r'^(.+)\1$')
     tot_invalid = 0
     for from_, to_ in id_ranges:
@@ -71,7 +78,7 @@ def solve_by_checking(id_ranges: list[tuple[str, str]]) -> None:
                 tot_invalid += n
     ic(tot_invalid)
 
-    # Part 2
+    # = [Part 2] ==================================================================================
     invalid = re.compile(r'^(.+)\1+$')
     tot_invalid = 0
     for from_, to_ in id_ranges:

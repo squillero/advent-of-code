@@ -9,9 +9,12 @@ INPUT_FILE_NAME = 'day01-test.txt'
 
 TOTAL_TICKS = 100
 
-
+###############################################################################################
 # Just roll...
 # Notez bien: No need to reset the dial (-1 % 100 == 99).
+###############################################################################################
+
+
 def part_one(file_name: str) -> int:
     """Turn dial and check position at the end."""
 
@@ -25,7 +28,11 @@ def part_one(file_name: str) -> int:
     return password
 
 
+###############################################################################################
 # Almost the same, just one click at a time.
+###############################################################################################
+
+
 def part_two(file_name: str) -> int:
     """Turn dial and check position after each tick."""
 
