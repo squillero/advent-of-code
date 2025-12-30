@@ -15,17 +15,17 @@ import (
 	"sync/atomic"
 )
 
-//const FileName string = "day02-test.txt"
+//const fileName string = "day02-test.txt"
 
-const FileName string = "day02-input.txt"
+const fileName string = "day02-input.txt"
 
 type Range struct {
-	From uint64
-	To   uint64
+	Min uint64 // From/To is usually half-open: [From ,To)
+	Max uint64
 }
 
-func ReadFile(fileName string) []Range {
-	file, err := os.Open(FileName)
+func readFile(fileName string) []Range {
+	file, err := os.Open(fileName)
 	if err != nil {
 		log.Panicf("Yeuch: %v", err)
 	}
@@ -40,8 +40,8 @@ func ReadFile(fileName string) []Range {
 		from, _ := strconv.Atoi(tok[0]) // can't fail ;-)
 		to, _ := strconv.Atoi(tok[1])   // can't fail ;-)
 		ranges = append(ranges, Range{
-			From: uint64(from),
-			To:   uint64(to),
+			Min: uint64(from),
+			Max: uint64(to),
 		})
 	}
 
@@ -51,7 +51,7 @@ func ReadFile(fileName string) []Range {
 func checkValidity(rng Range) uint64 {
 	var checksum uint64 = 0
 
-	for t := rng.From; t <= rng.To; t += 1 {
+	for t := rng.Min; t <= rng.Max; t += 1 {
 		id := fmt.Sprintf("%d", t)
 		if len(id)%2 == 0 && id[:len(id)/2] == id[len(id)/2:] {
 			// log.Printf("Illegal id \"%v\": \"%d\" == \"%d\"", id, id[:len(id)/2], id[len(id)/2:])
@@ -64,15 +64,15 @@ func checkValidity(rng Range) uint64 {
 func checkValidityEnhanced(rng Range) uint64 {
 	var checksum uint64 = 0
 
-	for t := rng.From; t <= rng.To; t += 1 {
+	for t := rng.Min; t <= rng.Max; t++ {
 		id := fmt.Sprintf("%d", t)
 		valid := true
-		for l := 1; l < len(id) && valid; l += 1 {
+		for l := 1; l < len(id) && valid; l++ {
 			if len(id)%l > 0 {
 				continue
 			}
 			tmp := false
-			for t := 0; t*l < len(id); t += 1 {
+			for t := 0; t*l < len(id); t++ {
 				if id[:l] != id[t*l:(t+1)*l] {
 					// log.Printf("Mismatch: id=%v, t=%v, l=%v\n", id, t, l)
 					tmp = true
@@ -93,7 +93,7 @@ func checkValidityEnhanced(rng Range) uint64 {
 }
 
 func main() {
-	ranges := ReadFile(FileName)
+	ranges := readFile(fileName)
 
 	var wg sync.WaitGroup
 	var checksum uint64

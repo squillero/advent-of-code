@@ -11,13 +11,13 @@ import (
 	"strconv"
 )
 
-const FileName string = "day01-test.txt"
+const fileName string = "day01-test.txt"
 
-// const FileName string = "day01-input.txt"
+// const fileName string = "day01-input.txt"
 
 func main() {
 	// Slurp file
-	turns := ReadFile(FileName)
+	turns := readFile(fileName)
 
 	// Part 1
 	dial := 50
@@ -42,7 +42,7 @@ func main() {
 			tick = -1
 			count = -tickCounter
 		}
-		for t := 0; t < count; t += 1 {
+		for t := 0; t < count; t++ {
 			dial += tick
 			if dial%100 == 0 {
 				password += 1
@@ -52,8 +52,8 @@ func main() {
 	log.Printf("Password (part 2): %v\n", password)
 }
 
-func ReadFile(fileName string) []int {
-	file, err := os.Open(FileName)
+func readFile(fileName string) []int {
+	file, err := os.Open(fileName)
 	if err != nil {
 		log.Panicf("%v", err)
 	}
