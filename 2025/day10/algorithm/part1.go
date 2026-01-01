@@ -70,7 +70,7 @@ func SelectButtons(machine *data.Machine) int {
 				}
 				selected[i]++ // pick 'next one' for that button
 				for i--; i >= 0; i-- {
-					// update previous buttons (according to rule)
+					// update previous slots (according to rule)
 					selected[i] = selected[i+1] + 1
 				}
 			}
