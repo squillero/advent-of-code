@@ -33,7 +33,7 @@ func SelectButtons(machine *data.Machine) int {
 	numButtons := machine.NumButtons()
 
 	for numSelected := 1; numSelected <= numButtons; numSelected++ {
-		// Using n (numSelected) buttons out of numButtons
+		// using n (numSelected) buttons out of numButtons
 		selected := make([]int, numSelected+1)
 		for i := 0; i <= numSelected; i++ {
 			selected[i] = numSelected - i - 1 // the (n+1)-th button in -1
@@ -55,7 +55,11 @@ func SelectButtons(machine *data.Machine) int {
 			//// then button[1] is set to button[2] + 1
 			//// then button[0] is set to button[1] + 1
 			//// select = [3 2 1 -1] -> Press buttons: 3, 2, and 1
-			if selected[0] < numButtons-1 {
+			//// next will be: select = [4 2 1 -1] 
+			//// next will be: select = [4 3 1 -1] 
+			//// next will be: select = [4 3 2 -1] 
+			//// then, finally: select = [3 2 1 0] (that's the end!) 
+			if selected[4] < numButtons-1 {
 				// eg. [3 1 0 -1] => [4 1 0 -1]
 				selected[0]++
 			} else {
