@@ -49,12 +49,12 @@ func SelectButtons(machine *data.Machine) int {
 			// rule: selected[i] > selected[j] if i < j -- it's a combination
 			// Example: numButtons is 5; numSelected is 3
 			//// selected = [4 3 0 -1] -> Press buttons: 4, 3, and 0
-			//// who's next?
+			//// find the next selection;
 			//// 4 can't be increased (buttons are {0, 1, 2, 3, 4})
 			//// 3 can't be increased (button[1] must be < button[0])
 			//// first possibility: button[2] -> change 0 to 1
-			//// then button[1] is set to button[2] + 1
-			//// then button[0] is set to button[1] + 1
+			//// then button[1] is set to 2 ie. button[2] + 1
+			//// then button[0] is set to 3 ie. button[1] + 1
 			//// select = [3 2 1 -1] -> Press buttons: 3, 2, and 1
 			//// next will be: select = [4 2 1 -1] 
 			//// next will be: select = [4 3 1 -1] 
