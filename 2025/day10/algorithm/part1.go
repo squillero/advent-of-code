@@ -66,9 +66,9 @@ func SelectButtons(machine *data.Machine) int {
 				// can't pick 'next one' for the first button (selected[0])
 				i := 0
 				for selected[i] >= numButtons-1-i {
-					i++
+					i++ // seek a button that may be changed (increased)
 				}
-				selected[i]++ // pick 'next one' for a button that may be changed
+				selected[i]++ // pick 'next one' for that button
 				for i--; i >= 0; i-- {
 					// update previous buttons (according to rule)
 					selected[i] = selected[i+1] + 1
