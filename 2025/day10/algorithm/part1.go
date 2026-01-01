@@ -34,6 +34,7 @@ func SelectButtons(machine *data.Machine) int {
 
 	for numSelected := 1; numSelected <= numButtons; numSelected++ {
 		// using exactly n (numSelected) buttons out of numButtons
+		// order does not matter, selecting a button twice is useless 
 		selected := make([]int, numSelected+1)
 		for i := 0; i <= numSelected; i++ {
 			selected[i] = numSelected - i - 1 // the (n+1)-th button in -1
@@ -44,7 +45,7 @@ func SelectButtons(machine *data.Machine) int {
 				return numSelected
 			}
 
-			// selected: the buttons we want to press (it's a permutation!)
+			// selected: the buttons we want to press (it's a combination)
 			// rule: selected[i] > selected[j] if i < j
 			// Example: numButtons is 5; numSelected is 3
 			//// selected = [4 3 0 -1] -> Press buttons: 4, 3, and 0
