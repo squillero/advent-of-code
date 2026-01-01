@@ -2,6 +2,6 @@
 // Copyright 2025 by Giovanni Squillero
 // SPDX-License-Identifier: 0BSD
 
-module github.com/squillero/advent-of-code/tree/main/2025/go
+module github.com/squillero/advent-of-code/2025/go
 
 go 1.25.5
