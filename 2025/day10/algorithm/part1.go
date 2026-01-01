@@ -39,7 +39,7 @@ func SelectButtons(machine *data.Machine) int {
 			selected[i] = numSelected - i - 1 // the (n+1)-th button in -1
 		}
 
-		for selected[numSelected] < 0 { // loop while (n+1)-th button is < 0
+		for selected[numSelected] < 0 { // loop while (n+1)-th button is -1
 			if lightsOk(machine, selected[:numSelected]) {
 				return numSelected
 			}
