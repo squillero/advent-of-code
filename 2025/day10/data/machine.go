@@ -20,20 +20,6 @@ type Machine struct {
 	JoltageRequirements []int
 }
 
-func (M *Machine) zapPress(buttons []Button) []bool {
-	status := make([]bool, len(M.LightDiagram))
-	for _, b := range buttons {
-		for _, w := range M.ButtonWirings[b] {
-			status[w] = !status[w]
-		}
-	}
-	return status
-}
-
-func (M *Machine) NumButtons() int {
-	return len(M.ButtonWirings)
-}
-
 func parseInts(token string) []int {
 	var nums []int
 
