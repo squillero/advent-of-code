@@ -45,8 +45,8 @@ func SelectButtons(machine *data.Machine) int {
 				return numSelected
 			}
 
-			// selected: the buttons we want to press (it's a combination)
-			// rule: selected[i] > selected[j] if i < j
+			// selected: the buttons we want to press 
+			// rule: selected[i] > selected[j] if i < j -- it's a combination
 			// Example: numButtons is 5; numSelected is 3
 			//// selected = [4 3 0 -1] -> Press buttons: 4, 3, and 0
 			//// who's next?
