@@ -61,15 +61,15 @@ func SelectButtons(machine *data.Machine) int {
 			//// next will be: select = [4 3 2 -1] 
 			//// then, finally: select = [3 2 1 0] (and that's the end!) 
 			if selected[0] < numButtons-1 {
-				// eg. [3 1 0 -1] => [4 1 0 -1]
+				// change first button. eg. [3 1 0 -1] => [4 1 0 -1]
 				selected[0]++
 			} else {
 				// can't pick 'next one' for the first button (selected[0])
 				i := 0
 				for selected[i] >= numButtons-1-i {
-					i++ // seek a button that may be changed (increased)
+					i++ // seek a selected[.] that may be changed (increased)
 				}
-				selected[i]++ // pick 'next one' for that button
+				selected[i]++ // switch to 'next button' for that selected[.]
 				for i--; i >= 0; i-- {
 					// update previous selected[.] according to combination rule
 					selected[i] = selected[i+1] + 1
