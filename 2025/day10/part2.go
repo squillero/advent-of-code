@@ -137,7 +137,7 @@ func SelectButtons_part2(machine *Machine, ch chan<- int) {
 	recursiveSelectButtons_part2(0, &currentSolution, &bestSolution)
 	atomic.AddInt32(&TaskCompletedCounter, 1)
 	log.Printf("Task %d (%.2f%% completed): Found a solution with %d presses %v\n",
-		thisTask, 100*float32(TaskCompletedCounter)/float32(TaskStartedCounter), bestSolution.buttons, bestSolution.numPresses)
+		thisTask, 100*float32(TaskCompletedCounter)/float32(TaskStartedCounter), bestSolution.numPresses, bestSolution.buttons)
 	ch <- bestSolution.numPresses
 }
 
