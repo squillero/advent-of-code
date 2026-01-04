@@ -21,6 +21,8 @@ type Solution struct {
 	numPresses   int
 	numButtons   int
 	numJoltages  int
+	tmpWired     [][]bool
+	tmpCount     []int
 }
 
 // var buttonRanges []buttonRange
@@ -47,30 +49,33 @@ func defineFromTo(sol *Solution) (int, int) {
 	}
 
 	// Find which button affect which joltage
-	wired := make([][]bool, sol.numButtons)
-	for b := range wired {
-		wired[b] = make([]bool, sol.numJoltages)
+	for _, w := range sol.tmpWired {
+		for i := range w {
+			w[i] = false // reset
+		}
 	}
 	for b := len(sol.buttons); b < sol.numButtons; b++ {
 		for _, joltage := range sol.machine.ButtonWirings[b] {
-			wired[b][joltage] = true
+			sol.tmpWired[b][joltage] = true
 		}
 	}
 
 	// Count button wirings for each Joltage
-	count := make([]int, len(target))
+	for i := range sol.tmpCount {
+		sol.tmpCount[i] = 0 // clear
+	}
 	for w := len(sol.buttons); w < len(sol.machine.ButtonWirings); w++ {
 		for _, j := range sol.machine.ButtonWirings[w] {
-			count[j] += 1
+			sol.tmpCount[j] += 1
 		}
 	}
 
 	// Set .from and .to
-	for button := range wired {
-		for joltage, wired := range wired[button] {
-			if wired && count[joltage] == 0 {
+	for button := range sol.tmpWired {
+		for joltage, wired := range sol.tmpWired[button] {
+			if wired && sol.tmpCount[joltage] == 0 {
 				log.Fatalln("Zero!")
-			} else if wired && count[joltage] == 1 {
+			} else if wired && sol.tmpCount[joltage] == 1 {
 				sol.buttonRanges[button].from = target[joltage]
 				sol.buttonRanges[button].to = target[joltage] + 1
 			} else if wired && sol.buttonRanges[button].to > target[joltage]+1 {
@@ -106,7 +111,13 @@ func SelectButtons_part2(machine *Machine, ch chan<- int) {
 		numPresses:   0,
 		numButtons:   len(machine.ButtonWirings),
 		numJoltages:  len(machine.JoltageRequirements),
+		tmpWired:     make([][]bool, len(machine.ButtonWirings)),
+		tmpCount:     make([]int, len(machine.JoltageRequirements)),
 	}
+	for b := range currentSolution.tmpWired {
+		currentSolution.tmpWired[b] = make([]bool, currentSolution.numJoltages)
+	}
+
 	bestSolution := Solution{
 		machine:      machine,
 		buttons:      nil,
@@ -114,6 +125,8 @@ func SelectButtons_part2(machine *Machine, ch chan<- int) {
 		numPresses:   1 << 30, // a large number (int is "at least" 32 bit)
 		numButtons:   currentSolution.numButtons,
 		numJoltages:  currentSolution.numJoltages,
+		tmpWired:     nil,
+		tmpCount:     nil,
 	}
 
 	recursiveSelectButtons_part2(0, &currentSolution, &bestSolution)
