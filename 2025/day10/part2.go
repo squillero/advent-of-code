@@ -7,6 +7,7 @@ package main
 import (
 	"log"
 	"slices"
+	"sync/atomic"
 )
 
 type buttonRange struct {
@@ -103,6 +104,8 @@ func valid(sol *Solution) bool {
 	return true
 }
 
+var TaskStartedCounter, TaskCompletedCounter int32
+
 func SelectButtons_part2(machine *Machine, ch chan<- int) {
 	currentSolution := Solution{
 		machine:      machine,
@@ -129,8 +132,12 @@ func SelectButtons_part2(machine *Machine, ch chan<- int) {
 		tmpCount:     nil,
 	}
 
+	atomic.AddInt32(&TaskStartedCounter, 1)
+	thisTask := TaskStartedCounter
 	recursiveSelectButtons_part2(0, &currentSolution, &bestSolution)
-	log.Printf("Found a solution: %v (%v presses)\n", bestSolution.buttons, bestSolution.numPresses)
+	atomic.AddInt32(&TaskCompletedCounter, 1)
+	log.Printf("Task %d (%.2f%% completed): Found a solution with %d presses %v\n",
+		thisTask, 100*float32(TaskCompletedCounter)/float32(TaskStartedCounter), bestSolution.buttons, bestSolution.numPresses)
 	ch <- bestSolution.numPresses
 }
 
