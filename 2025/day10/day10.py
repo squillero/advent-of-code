@@ -6,6 +6,7 @@ from typing import Iterable
 from itertools import combinations
 import re
 from tqdm.auto import tqdm
+import numpy as np
 
 from icecream import ic
 
@@ -41,6 +42,10 @@ class Machine:
     def num_buttons(self) -> int:
         return len(self._button_wirings)
 
+    @property
+    def button_wirings(self) -> tuple[tuple[int, ...], ...]:
+        return self._button_wirings
+
     def __str__(self) -> str:
         return f'[{self.goal_light}] {" ".join(str(_) for _ in self._button_wirings)} {{{self._goal_joltage}}}'
 
@@ -59,59 +64,6 @@ class Machine:
             for w in self._button_wirings[button]:
                 status[w] += 1
         return tuple(status)
-
-
-def main():
-    pattern = re.compile(r'\[(?P<diagram>.*)\]\s*(?P<buttons>.*)\s*\{(?P<joltage>.*)\}')
-
-    machines = list()
-    with open(INPUT_FILE_NAME) as file:
-        for line in file:
-            assert (m := pattern.match(line))
-            machines.append(Machine(m.group('diagram'), m.group('buttons'), m.group('joltage')))
-
-    # = [Part 1] ============================================================
-    # Simple brute force
-    checksum = 0
-    for machine in tqdm(machines):
-        goal = machine.goal_light
-        for length in range(1, machine.num_buttons + 1):
-            if any(
-                machine.press_buttons(buttons) == goal
-                for buttons in combinations(range(machine.num_buttons), length)
-            ):
-                checksum += length
-                break
-        else:
-            assert False
-    ic(checksum)
-
-    # = [Part 2] ============================================================
-    # Part 2 -- As previous, but with a different goal (joltage)
-
-    checksum = 0
-    for machine in machines:
-        goal = machine.goal_joltage
-        reasonable_buttons = list()
-        for button in range(machine.num_buttons):
-            tmp = list()
-            while all(c < g for c, g in zip(machine.press_buttons_joltage(tmp), goal)):
-                tmp.append(button)
-            reasonable_buttons.extend(tmp)
-
-        # Notez Bien: The total number of combinations of "reasonable" buttons
-        # would be something like (rough estimated):
-        # 1,050,932,584,007,919,465,924,231,680,174,062,991,803,882,860,871,821,049,
-        #   507,210,975,344,873,147,865,476,054,520,905,922,902,746,390,892,555,684,
-        #   070,111,906,482,732,065,067,261,496,208,661,405,117,413,289,190,368,364,
-        #   266,394,710,981,301,717,346,962,896,309,115,085,260,012,484,310,087,905,
-        #   036,909,879,433,459,334,968,606,976,080,067,869,701,628,670,691,652,990,
-        #   372,309,557,477,009,209,344,293,463,511,528,898,666,754,457,810,242,512,
-        #   444,774,202,470,900,723,464,559,433,806,252 ;-)
-
-        checksum += try_joltage(machine, reasonable_buttons)
-
-    ic(checksum)
 
 
 def try_joltage(machine, reasonable_buttons):
@@ -140,6 +92,58 @@ def try_joltage(machine, reasonable_buttons):
 
     _try_joltage(0)
     return len(best_solution)
+
+
+def main():
+    pattern = re.compile(r'\[(?P<diagram>.*)\]\s*(?P<buttons>.*)\s*\{(?P<joltage>.*)\}')
+
+    machines = list()
+    with open(INPUT_FILE_NAME) as file:
+        for line in file:
+            assert (m := pattern.match(line))
+            machines.append(Machine(m.group('diagram'), m.group('buttons'), m.group('joltage')))
+
+    # = [Part 1] ============================================================
+    # Simple brute force
+
+    checksum = 0
+    for machine in tqdm(machines):
+        goal = machine.goal_light
+        for length in range(1, machine.num_buttons + 1):
+            if any(
+                machine.press_buttons(buttons) == goal
+                for buttons in combinations(range(machine.num_buttons), length)
+            ):
+                checksum += length
+                break
+        else:
+            assert False
+    ic(checksum)
+
+    # = [Part 2] ============================================================
+    # Part 2 -- As previous, but with a different goal (joltage)
+
+    ## checksum = 0
+    ## for machine in machines:
+    ##     goal = machine.goal_joltage
+    ##     reasonable_buttons = list()
+    ##     for button in range(machine.num_buttons):
+    ##         tmp = list()
+    ##         while all(c < g for c, g in zip(machine.press_buttons_joltage(tmp), goal)):
+    ##             tmp.append(button)
+    ##         reasonable_buttons.extend(tmp)
+    ##     checksum += try_joltage(machine, reasonable_buttons)
+    ## ic(checksum)
+
+    # Notez Bien: The total number of combinations of "reasonable" buttons
+    # would be something like (rough estimated):
+    # 1,050,932,584,007,919,465,924,231,680,174,062,991,803,882,860,871,821,049,
+    #   507,210,975,344,873,147,865,476,054,520,905,922,902,746,390,892,555,684,
+    #   070,111,906,482,732,065,067,261,496,208,661,405,117,413,289,190,368,364,
+    #   266,394,710,981,301,717,346,962,896,309,115,085,260,012,484,310,087,905,
+    #   036,909,879,433,459,334,968,606,976,080,067,869,701,628,670,691,652,990,
+    #   372,309,557,477,009,209,344,293,463,511,528,898,666,754,457,810,242,512,
+    #   444,774,202,470,900,723,464,559,433,806,252 ;-)
 
 
 if __name__ == '__main__':

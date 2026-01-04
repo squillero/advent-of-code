@@ -2,7 +2,7 @@
 // Copyright 2025 by Giovanni Squillero
 // SPDX-License-Identifier: 0BSD
 
-package data
+package main
 
 import (
 	"bufio"

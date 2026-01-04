@@ -6,28 +6,32 @@ package main
 
 import (
 	"log"
-
-	"github.com/squillero/advent-of-code/2025/go/day10/algorithm"
-	"github.com/squillero/advent-of-code/2025/go/day10/data"
+	"log/slog"
 )
 
-//const fileName string = "day10-test.txt"
+// const fileName string = "day10-test.txt"
 
 const fileName string = "day10-input.txt"
 
 func main() {
+	slog.SetLogLoggerLevel(slog.LevelDebug)
+
 	// Slurp file
-	machines := data.ReadFile(fileName)
+	machines := ReadFile(fileName)
 
-	part1 := 0
-	for _, m := range machines {
-		part1 += algorithm.SelectButtons_part1(&m)
+	// part1 := 0
+	// for _, m := range machines {
+	// 	part1 += SelectButtons_part1(&m)
+	// }
+	// log.Printf("Part 1: %v\n", part1)
+
+	ch := make(chan int, len(machines))
+	for i := range machines {
+		go SelectButtons_part2(&machines[i], ch)
 	}
-	log.Printf("Part 1: %v\n", part1)
-
 	part2 := 0
-	for _, m := range machines {
-		part2 += algorithm.SelectButtons_part2(&m)
+	for range machines {
+		part2 += <-ch
 	}
 	log.Printf("Part 2: %v\n", part2)
 }
