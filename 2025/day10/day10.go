@@ -9,7 +9,7 @@ import (
 	"log/slog"
 )
 
-// const fileName string = "day10-test.txt"
+//const fileName string = "day10-test.txt"
 
 const fileName string = "day10-input.txt"
 

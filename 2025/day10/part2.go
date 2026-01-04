@@ -15,26 +15,25 @@ type buttonRange struct {
 }
 
 type Solution struct {
-	machine     *Machine
-	buttons     []int
-	numPresses  int
-	numButtons  int
-	numJoltages int
+	machine      *Machine
+	buttons      []int
+	buttonRanges []buttonRange
+	numPresses   int
+	numButtons   int
+	numJoltages  int
 }
 
 // var buttonRanges []buttonRange
 
-func updateMinMax(sol *Solution) []buttonRange {
-	// Output: Valid ranges for buttons' presses
-	ranges := make([]buttonRange, sol.numButtons)
+func defineFromTo(sol *Solution) (int, int) {
 	var b int
 	for b = 0; b < len(sol.buttons); b++ {
-		ranges[b].from = sol.buttons[b]
-		ranges[b].to = sol.buttons[b] + 1
+		sol.buttonRanges[b].from = sol.buttons[b]
+		sol.buttonRanges[b].to = sol.buttons[b] + 1
 	}
 	for ; b < sol.numButtons; b++ {
-		ranges[b].from = 0
-		ranges[b].to = 1000000
+		sol.buttonRanges[b].from = 0
+		sol.buttonRanges[b].to = 1 << 30 // a big number
 	}
 
 	// Update target Joltages
@@ -42,7 +41,7 @@ func updateMinMax(sol *Solution) []buttonRange {
 	for button, num := range sol.buttons {
 		for _, wiring := range sol.machine.ButtonWirings[button] {
 			if target[wiring] -= num; target[wiring] < 0 {
-				return nil
+				return -1, -1
 			}
 		}
 	}
@@ -72,14 +71,14 @@ func updateMinMax(sol *Solution) []buttonRange {
 			if wired && count[joltage] == 0 {
 				log.Fatalln("Zero!")
 			} else if wired && count[joltage] == 1 {
-				ranges[button].from = target[joltage]
-				ranges[button].to = target[joltage] + 1
-			} else if wired && ranges[button].to > target[joltage]+1 {
-				ranges[button].to = target[joltage] + 1
+				sol.buttonRanges[button].from = target[joltage]
+				sol.buttonRanges[button].to = target[joltage] + 1
+			} else if wired && sol.buttonRanges[button].to > target[joltage]+1 {
+				sol.buttonRanges[button].to = target[joltage] + 1
 			}
 		}
 	}
-	return ranges
+	return sol.buttonRanges[len(sol.buttons)].from, sol.buttonRanges[len(sol.buttons)].to
 }
 
 // var bestSolution, currentSolution Solution
@@ -99,20 +98,22 @@ func valid(sol *Solution) bool {
 	return true
 }
 
-func SelectButtons_part2(machine *Machine, ch chan int) {
+func SelectButtons_part2(machine *Machine, ch chan<- int) {
 	currentSolution := Solution{
-		machine:     machine,
-		buttons:     make([]int, 0, len(machine.ButtonWirings)),
-		numPresses:  0,
-		numButtons:  len(machine.ButtonWirings),
-		numJoltages: len(machine.JoltageRequirements),
+		machine:      machine,
+		buttons:      make([]int, 0, len(machine.ButtonWirings)),
+		buttonRanges: make([]buttonRange, len(machine.ButtonWirings)),
+		numPresses:   0,
+		numButtons:   len(machine.ButtonWirings),
+		numJoltages:  len(machine.JoltageRequirements),
 	}
 	bestSolution := Solution{
-		machine:     machine,
-		buttons:     nil,
-		numPresses:  1 << 30, // a large number (int is "at least" 32 bit)
-		numButtons:  currentSolution.numButtons,
-		numJoltages: currentSolution.numJoltages,
+		machine:      machine,
+		buttons:      nil,
+		buttonRanges: nil,
+		numPresses:   1 << 30, // a large number (int is "at least" 32 bit)
+		numButtons:   currentSolution.numButtons,
+		numJoltages:  currentSolution.numJoltages,
 	}
 
 	recursiveSelectButtons_part2(0, &currentSolution, &bestSolution)
@@ -132,17 +133,13 @@ func recursiveSelectButtons_part2(index int, current *Solution, best *Solution) 
 		}
 		return true
 	}
-	if possiblePresses := updateMinMax(current); possiblePresses != nil {
-		for p := possiblePresses[index].from; p < possiblePresses[index].to; p++ {
-			current.buttons = append(current.buttons, p)
-			current.numPresses += p
-			recursiveSelectButtons_part2(index+1, current, best)
-			current.numPresses -= p
-			current.buttons = current.buttons[:len(current.buttons)-1]
-		}
-	} else {
-		// Already overflowed
-		return true
+	from, to := defineFromTo(current)
+	for p := from; p < to; p++ {
+		current.buttons = append(current.buttons, p)
+		current.numPresses += p
+		recursiveSelectButtons_part2(index+1, current, best)
+		current.numPresses -= p
+		current.buttons = current.buttons[:len(current.buttons)-1]
 	}
 	return false
 }
