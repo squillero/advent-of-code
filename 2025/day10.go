@@ -1,6 +1,7 @@
 // Advent of Code 2025 | https://adventofcode.com/2025/day/10
-// Copyright 2025 by Giovanni Squillero
-// SPDX-License-Identifier: 0BSD
+// Author: Giovanni Squillero <giovanni.squillero@polito.it>
+// Copyright © 2025 Giovanni Squillero / Politecnico di Torino
+// Free under certain conditions — see the license for details.
 
 package main
 
